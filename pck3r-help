@@ -1,0 +1,37 @@
+-----------------------------------------
+|                                       |
+| pck3r : It is a versatile program and |
+|                                       |
+| you avoid using useless commands and  |
+|                                       |
+| it is written for Ubuntu...           |
+|                                       |
+-----------------------------------------
+
+"install" command :
+    pck3r install "somthing" :
+    {
+            nodejs,
+            python::pip,
+            ohmyzsh,
+            or ...
+    }
+
+"clear" command :
+    pck3r clear:
+    {clear your terminal }
+
+"iso" command : 
+    pck3r iso 32/64  "somthing":
+    {
+        mint,
+        fedora,
+        gentoo,
+        or ...
+    }
+
+"dwn" command :
+    pck3r dwn "https/http://somthing"
+    {dwn is downloader for pck3r }
+
+
