@@ -8,13 +8,21 @@ good luck...
 
 
 *-----------------------------------------
+
 |                                       |
+
 | pck3r : It is a versatile program and |
+
 |                                       |
+
 | you avoid using useless commands and  |
+
 |                                       |
+
 | it is written for Ubuntu...           |
+
 |                                       |
+
 -----------------------------------------*
 
 
