@@ -4,9 +4,10 @@ this program , create by amzy0(M.Amin azimi.K) this program , can change under G
 you can send me a pull request in github : https"//github.com/amzy-0/pck3r and features will be added to pck3r soon ...
 good luck...
 
-# help and  use 
-*
------------------------------------------
+# help and  use
+
+
+*-----------------------------------------
 |                                       |
 | pck3r : It is a versatile program and |
 |                                       |
@@ -14,8 +15,10 @@ good luck...
 |                                       |
 | it is written for Ubuntu...           |
 |                                       |
------------------------------------------
-*
+-----------------------------------------*
+
+
+
 "install" command :
     pck3r install "somthing" :
     {
