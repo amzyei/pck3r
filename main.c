@@ -109,26 +109,37 @@ int main ( int argc , char *argv[]){
                  * if argv[i++] (after "install" arg) is empty
                  */
  
-                 else if(strcmp(argv[2], "nodejs")==0){
+                else if(strcmp(argv[2], "nodejs")==0){
                     system("echo \x1B[33m");
                     system("sudo apt install curl");
                     system("curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -");
                     system("sudo apt install nodejs");
                     system("clear");
-                    
+
                     system("echo \x1B[32m\"node version : \"");
                     system("node -v");
                     system("echo \x1B[32m\"npm version : \""); 
                     system("npm -v");
                     break;
+                }
 
-                 } 
-                 else{
-                     char finaly_do[1000] = "sudo apt install ";
-                     strcat(finaly_do, argv[2]);
-                     system(finaly_do);
-                     break;
-                 }
+                else if(strcmp(argv[2], "python3pip")==0){
+
+                    /*
+                    * if argv[2] is null 
+                    * like this ($ pck3r python3pip )
+                    */   
+
+                    system("sudo apt install python3-pip");  
+                    break;    
+                }
+
+                else{
+                    char finaly_do[1000] = "sudo apt install ";
+                    strcat(finaly_do, argv[2]);
+                    system(finaly_do);
+                    break;
+                }
                  
             }
 
@@ -163,6 +174,7 @@ int main ( int argc , char *argv[]){
                     break;
                 }
 
+
                 /*
                  * if argv[2] not null , check it ! 
                  */
@@ -181,12 +193,12 @@ int main ( int argc , char *argv[]){
              * if user want update a program or tools or ...
              * like this ($ pck3r update)
              */
-
+            
             else if(strcmp(argv[1], "update")==0){
                 
                 /*
                  * if argv[2] is null 
-                 * like this ($ pck3r update "\0")
+                 * like this ($ pck3r update )
                  */   
 
                 system("sudo apt install git");
@@ -200,7 +212,6 @@ int main ( int argc , char *argv[]){
                 printf("%sCommand not found ! \n",RED);
                 break;
             }
-
 	}
 
 	return 0;
