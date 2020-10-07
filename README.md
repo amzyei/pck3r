@@ -23,7 +23,9 @@ good luck...
     pck3r install "somthing" :
     {
             nodejs,
-            python::pip,
+            python3pip,
+            java,
+            wine,
             ohmyzsh,
             or ...
     }
