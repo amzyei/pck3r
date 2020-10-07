@@ -5,7 +5,7 @@ you can send me a pull request in github : https"//github.com/amzy-0/pck3r and f
 good luck...
 
 # help and  use 
-
+*
 -----------------------------------------
 |                                       |
 | pck3r : It is a versatile program and |
@@ -15,7 +15,7 @@ good luck...
 | it is written for Ubuntu...           |
 |                                       |
 -----------------------------------------
-
+*
 "install" command :
     pck3r install "somthing" :
     {
