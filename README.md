@@ -20,7 +20,7 @@ good luck...
 
 
 "install" command :
-    pck3r install "somthing" :
+    $ pck3r install "somthing" :
     {
             nodejs,
             python3pip,
@@ -35,7 +35,7 @@ good luck...
     {clear your terminal }
 
 "iso" command : 
-    pck3r iso 32/64  "somthing":
+   $ pck3r iso 32/64  "somthing":
     {
         mint,
         fedora,
@@ -44,6 +44,9 @@ good luck...
     }
 
 "dwn" command :
-    pck3r dwn "https/http://somthing"
+  $ pck3r dwn "https/http://somthing"
     {dwn is downloader for pck3r }
 
+# install pck3r  global 
+
+$ ./install 
