@@ -13,6 +13,7 @@ static void Pck3r_installer (GtkWidget *wid, GtkWidget *win){
 }
 
 static void install_pck3r (GtkWidget *wid, GtkWidget *win){
+  GtkWidget *dialog_after_install = NULL;
     system("sudo cp -r ../pck3r /usr/bin/");
     system("echo pck3r copied ...");
     system("sudo cp -r ../pck3r-help /usr/bin/");
@@ -23,7 +24,11 @@ static void install_pck3r (GtkWidget *wid, GtkWidget *win){
     system("sudo apt install libgtk-3-dev");
     system("echo pck3r intalled !!!!!");
     system("sleep 5");
-    system("exit");
+    dialog_after_install = gtk_message_dialog_new (GTK_WINDOW (win), GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_CLOSE,
+    "Pck3r installed!\n");
+    gtk_window_set_position (GTK_WINDOW (dialog_after_install), GTK_WIN_POS_CENTER);
+    gtk_dialog_run (GTK_DIALOG (dialog_after_install));
+    gtk_widget_destroy (dialog_after_install);
 }
 
 int main (int argc, char *argv[]){
