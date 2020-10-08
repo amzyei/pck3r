@@ -1,13 +1,13 @@
 
 /*
- * this program created for novice in linux 
+ * this program created for novice in linux
  * and this program, can handle almost things in ubuntu and ...
  * and all distributions  based on  debian  ...
  * this program , create by amzy0(M.Amin azimi.K)
  * this program , can change under GPL3 license ...
  * you can send me a pull request in github :
  * https"//github.com/amzy-0/pck3r
- * good luck  
+ * good luck
  */
 
 #include <stdio.h>
@@ -28,14 +28,14 @@
     //color zone
 ////////////////////////
 
-#define NRM  "\x1B[0m"                                                               
-#define RED  "\x1B[31m"                                                              
-#define GRN  "\x1B[32m"                                                              
-#define YEL  "\x1B[33m"                                                              
-#define BLU  "\x1B[34m"                                                              
-#define MAG  "\x1B[35m"                                                              
-#define CYN  "\x1B[36m"                                                              
-#define WHT  "\x1B[37m" 
+#define NRM  "\x1B[0m"
+#define RED  "\x1B[31m"
+#define GRN  "\x1B[32m"
+#define YEL  "\x1B[33m"
+#define BLU  "\x1B[34m"
+#define MAG  "\x1B[35m"
+#define CYN  "\x1B[36m"
+#define WHT  "\x1B[37m"
 
 ////////////////////////
     //color zone ended
@@ -43,7 +43,7 @@
 
 
 int main ( int argc , char *argv[]){
-    
+
     /*
      * int i ; (i variable in for loop (for argv[index number(i)]))
      */
@@ -55,10 +55,10 @@ int main ( int argc , char *argv[]){
      */
 
 	for ( i = 0 ; i < argc ; i++ ){
-            
+
             /*
-             * if after pck3r is empty (no args) 
-             * argc N.(1) is pck3r 
+             * if after pck3r is empty (no args)
+             * argc N.(1) is pck3r
              */
 
             if(argc == 1){
@@ -93,22 +93,22 @@ int main ( int argc , char *argv[]){
              */
 
             else if (strcmp(argv[1], "install")==0){
-                
+
                 /*
                  * if after "install" is NULL
                  * like this : $ pck3r install "\0"
-                 */ 
+                 */
 
                if(argv[2] == NULL){
                     printf("%s", RED);
                     printf("ERROR !!(no arg )\nTry : $ pck3r install \"somthing else\"\nOr (if you run pck3r, localy) : $ ./pck3r install \"somthing else\"\n");
-                    break; 
+                    break;
                 }
 
                 /*
                  * if argv[i++] (after "install" arg) is empty
                  */
- 
+
                 else if(strcmp(argv[2], "nodejs")==0){
                     system("echo \x1B[33m");
                     system("sudo apt install curl");
@@ -118,7 +118,7 @@ int main ( int argc , char *argv[]){
 
                     system("echo \x1B[32m\"node version : \"");
                     system("node -v");
-                    system("echo \x1B[32m\"npm version : \""); 
+                    system("echo \x1B[32m\"npm version : \"");
                     system("npm -v");
                     break;
                 }
@@ -126,12 +126,25 @@ int main ( int argc , char *argv[]){
                 else if(strcmp(argv[2], "python3pip")==0){
 
                     /*
-                    * if argv[2] is null 
-                    * like this ($ pck3r python3pip )
-                    */   
+                    * if argv[2] not null
+                    * || like this ($ pck3r install  python3pip )
+                    */
 
-                    system("sudo apt install python3-pip");  
-                    break;    
+                    system("sudo apt install python3-pip");
+                    break;
+                }
+                else if(strcmp(argv[2], "ohmyzsh")==0){
+
+                    /*
+                    * if argv[2] not null
+                    * || like this ($ pck3r install ohmyzsh )
+                    */
+
+                    system("sudo apt install git");
+                    system("sudo apt install zsh");
+                    system("sh -c \"$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)\"");
+                    printf("%sZSH installed \n", GRN);
+                    break;
                 }
 
                 else{
@@ -140,7 +153,7 @@ int main ( int argc , char *argv[]){
                     system(finaly_do);
                     break;
                 }
-                 
+
             }
 
             /*
@@ -149,9 +162,9 @@ int main ( int argc , char *argv[]){
              */
 
             else if(strcmp(argv[1], "uninstall")==0){
-                
+
                 /*
-                 * if argv[2] is null 
+                 * if argv[2] is null
                  * like this ($ pck3r uninstall "\0")
                  */
 
@@ -160,12 +173,12 @@ int main ( int argc , char *argv[]){
                     printf("uninstall called for remove  \"\\0(NULL)\" \n");
                     printf("after \"uninstall\" is empty ! \n");
                     break;
-                    
+
                 }
 
                 /*
-                 * if user want uninstall, 
-                 * a programm ($ pck3r uninstall nodejs) 
+                 * if user want uninstall,
+                 * a programm ($ pck3r uninstall nodejs)
                  */
 
                 else if(strcmp(argv[2], "nodejs")==0){
@@ -176,7 +189,7 @@ int main ( int argc , char *argv[]){
 
 
                 /*
-                 * if argv[2] not null , check it ! 
+                 * if argv[2] not null , check it !
                  */
 
                 else if(argv[2]!=NULL){
@@ -186,26 +199,43 @@ int main ( int argc , char *argv[]){
                     system("echo \x1B[33m ");
                     system(finaly_do);
                     break;
-                }               
+                }
             }
 
             /*
              * if user want update a program or tools or ...
              * like this ($ pck3r update)
              */
-            
+
             else if(strcmp(argv[1], "update")==0){
-                
+
                 /*
-                 * if argv[2] is null 
+                 * if argv[2] is null
                  * like this ($ pck3r update )
-                 */   
+                 */
 
                 system("sudo apt install git");
+                char* home = getenv("HOME");
+                chdir(home);
+                system("pwd");
+                system("git clone https://github.com/amzy-0/pck3r");
+                system("mv ~/pck3r ~/.pck3r");
+                system("pwd");
                 system("git remote add pck3r  https://github.com/amzy-0/pck3r");
                 system("git fetch pck3r");
-                system("git merge pck3r/master master");  
-                break;    
+                system("git merge pck3r/master master");
+                system("sudo cp -r pck3r /usr/bin/");
+                system("echo pck3r copied ...");
+                system("sudo cp -r pck3r-help /usr/bin/");
+                system("echo pak3r-help copied ...");
+                system("echo pck3r dependences ...");
+                system("sudo apt install wget");
+                system("sudo apt install curl");
+                system("sudo apt install libgtk-3-dev");
+                system("sleep 5");
+
+                printf("%spck3r updated \n",GRN);
+                break;
             }
 
             else{
@@ -213,8 +243,5 @@ int main ( int argc , char *argv[]){
                 break;
             }
 	}
-
 	return 0;
-
-
 }
