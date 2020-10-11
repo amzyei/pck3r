@@ -146,6 +146,19 @@ int main ( int argc , char *argv[]){
                     printf("%sZSH installed \n", GRN);
                     break;
                 }
+                else if(strcmp(argv[2], "ohmyzsh")==0){
+
+                    /*
+                    * if argv[2] not null
+                    * || like this ($ pck3r install ohmyzsh )
+                    */
+
+                    system("sudo apt install git");
+                    system("sudo apt install zsh");
+                    system("sh -c \"$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)\"");
+                    printf("%sZSH installed \n", GRN);
+                    break;
+                }
 
                 else{
                     char finaly_do[1000] = "sudo apt install ";
@@ -242,6 +255,8 @@ int main ( int argc , char *argv[]){
                 printf("%sCommand not found ! \n",RED);
                 break;
             }
+
 	}
 	return 0;
 }
+
