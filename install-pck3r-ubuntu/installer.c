@@ -33,6 +33,14 @@ static void install_pck3r (GtkWidget *wid, GtkWidget *win){
 }
 
 int main (int argc, char *argv[]){
+ /*
+  *
+  * superuser is require ! 
+  * for copy all executable file to /bin
+  *
+  */
+  system("sudo su  ./installer");
+  system("clear");
   GtkWidget *button = NULL;
   GtkWidget *label = NULL;
   GtkWidget *win = NULL;
