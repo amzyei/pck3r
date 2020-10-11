@@ -29,6 +29,7 @@ static void install_pck3r (GtkWidget *wid, GtkWidget *win){
     gtk_window_set_position (GTK_WINDOW (dialog_after_install), GTK_WIN_POS_CENTER);
     gtk_dialog_run (GTK_DIALOG (dialog_after_install));
     gtk_widget_destroy (dialog_after_install);
+    gtk_main_quit();
 }
 
 int main (int argc, char *argv[]){
