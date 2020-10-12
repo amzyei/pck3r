@@ -41,7 +41,12 @@
     //color zone ended
 ////////////////////////
 
-
+////////////////////////
+    //functions
+    void updator();
+    void clear();
+    void ohmyzsh_installer();
+///////////////////////
 int main ( int argc , char *argv[]){
 
     /*
@@ -70,7 +75,7 @@ int main ( int argc , char *argv[]){
              */
 
 			else if(strcmp(argv[1], "clear")==0){
-                system("clear");
+                clear();
 			}
 
             /*
@@ -82,7 +87,6 @@ int main ( int argc , char *argv[]){
                 * read help (run : less pck3r-help)
                 */
                 char read_help[ARG_LEN_HELP] = "less pck3r-";
-                system("clear");
                 strcat(read_help, argv[i]);
                 printf("%s", CYN);
                 system(read_help);
@@ -100,8 +104,7 @@ int main ( int argc , char *argv[]){
                  */
 
                if(argv[2] == NULL){
-                    printf("%s", RED);
-                    printf("ERROR !!(no arg )\nTry : $ pck3r install \"somthing else\"\nOr (if you run pck3r, localy) : $ ./pck3r install \"somthing else\"\n");
+                    printf("%sERROR !!(no arg )\nTry : $ pck3r install \"somthing else\"\nOr (if you run pck3r, localy) : $ ./pck3r install \"somthing else\"\n",RED);
                     break;
                 }
 
@@ -139,23 +142,7 @@ int main ( int argc , char *argv[]){
                     * if argv[2] not null
                     * || like this ($ pck3r install ohmyzsh )
                     */
-
-                    system("sudo apt install git");
-                    system("sudo apt install zsh");
-                    system("sh -c \"$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)\"");
-                    printf("%sZSH installed \n", GRN);
-                    break;
-                }
-                else if(strcmp(argv[2], "ohmyzsh")==0){
-
-                    /*
-                    * if argv[2] not null
-                    * || like this ($ pck3r install ohmyzsh )
-                    */
-
-                    system("sudo apt install git");
-                    system("sudo apt install zsh");
-                    system("sh -c \"$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)\"");
+                    ohmyzsh_installer();
                     printf("%sZSH installed \n", GRN);
                     break;
                 }
@@ -227,28 +214,8 @@ int main ( int argc , char *argv[]){
                  * like this ($ pck3r update )
                  */
 
-                system("sudo apt install git");
-                char* home = getenv("HOME");
-                chdir(home);
-                system("pwd");
-                system("git clone https://github.com/amzy-0/pck3r");
-                system("mv ~/pck3r ~/.pck3r");
-                system("pwd");
-                system("git remote add pck3r  https://github.com/amzy-0/pck3r");
-                system("git fetch pck3r");
-                system("git merge pck3r/master master");
-                system("sudo cp -r pck3r /usr/bin/");
-                system("echo pck3r copied ...");
-                system("sudo cp -r pck3r-help /usr/bin/");
-                system("echo pak3r-help copied ...");
-                system("echo pck3r dependences ...");
-                system("sudo apt install wget");
-                system("sudo apt install curl");
-                system("sudo apt install libgtk-3-dev");
-                system("sleep 5");
-
-                printf("%spck3r updated \n",GRN);
-                break;
+               updator();
+               break;
             }
 
             else{
@@ -260,3 +227,38 @@ int main ( int argc , char *argv[]){
 	return 0;
 }
 
+
+void updator(){
+
+    system("sudo apt install git");
+    char* home = getenv("HOME");
+    chdir(home);
+    system("pwd");
+    system("git clone https://github.com/amzy-0/pck3r");
+    system("mv pck3r .pck3r");
+    system("pwd");
+    system("git remote add pck3r  https://github.com/amzy-0/pck3r");
+    system("git fetch pck3r");
+    system("git merge pck3r/master master");
+    system("sudo cp -r pck3r /usr/bin/");
+    system("echo pck3r copied ...");
+    system("sudo cp -r pck3r-help /usr/bin/");
+    system("echo pak3r-help copied ...");
+    system("echo pck3r dependences ...");
+    system("sudo apt install wget");
+    system("sudo apt install curl");
+    system("sudo apt install libgtk-3-dev");
+    system("sleep 5");
+    printf("%spck3r updated \n",GRN);
+ 
+}
+
+void clear(){system("clear");}
+
+void ohmyzsh_installer(){
+
+    system("sudo apt install git");
+    system("sudo apt install zsh");
+    system("sh -c \"$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)\"");
+
+}
