@@ -83,7 +83,7 @@ int main ( int argc , char *argv[]){
              * if argv[i] is "help" ($ pck3r help)
              */
 
-			else if(strcmp(argv[i], "help")==0){
+			else if(strcmp(argv[1], "help")==0){
                 /*
                 * read help (run : less pck3r-help)
                 */
@@ -114,16 +114,7 @@ int main ( int argc , char *argv[]){
                  */
 
                 else if(strcmp(argv[2], "nodejs")==0){
-                    system("echo \x1B[33m");
-                    system("sudo apt install curl");
-                    system("curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -");
-                    system("sudo apt install nodejs");
-                    system("clear");
-
-                    system("echo \x1B[32m\"node version : \"");
-                    system("node -v");
-                    system("echo \x1B[32m\"npm version : \"");
-                    system("npm -v");
+                    node_installer();
                     break;
                 }
 
@@ -234,6 +225,7 @@ void clear(){system("clear");}
 
 void node_installer(){
 
+
     system("echo \x1B[33m");
     system("sudo apt install curl");
     system("curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -");
@@ -244,10 +236,12 @@ void node_installer(){
     system("node -v");
     system("echo \x1B[32m\"npm version : \"");
     system("npm -v");
+
 }
 
 void ohmyzsh_installer(){
 
+    system("echo \x1B[33m");
     system("sudo apt install git");
     system("sudo apt install zsh");
     system("sh -c \"$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)\"");
@@ -256,6 +250,7 @@ void ohmyzsh_installer(){
 
 void updator(){
 
+    system("echo \x1B[33m");
     system("sudo apt install git");
     char* home = getenv("HOME");
     chdir(home);
