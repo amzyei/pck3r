@@ -140,10 +140,19 @@ int main ( int argc , char *argv[]){
                 }
 
                 else{
-                    char finaly_do[1000] = "sudo apt install ";
-                    strcat(finaly_do, argv[2]);
-                    system(finaly_do);
+                    i=2;
+                    char apter[1000] = "sudo apt install ";
+                    char finaly_do[1000] = {"\0"}; 
+                    while (argv[i]!=NULL){
+                        strcat(finaly_do, argv[i]);
+                        strcat(finaly_do, " ");
+                        i++;
+                    }
+                    strcat(apter, finaly_do);
+                    system(apter);
+                    printf("packages : %s%s\n",CYN, finaly_do);
                     break;
+                    
                 }
 
             }
