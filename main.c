@@ -45,6 +45,7 @@
     //functions
     void updator();
     void clear();
+    void node_installer();
     void ohmyzsh_installer();
 ///////////////////////
 int main ( int argc , char *argv[]){
@@ -228,6 +229,31 @@ int main ( int argc , char *argv[]){
 }
 
 
+
+void clear(){system("clear");}
+
+void node_installer(){
+
+    system("echo \x1B[33m");
+    system("sudo apt install curl");
+    system("curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -");
+    system("sudo apt install nodejs");
+    system("clear");
+
+    system("echo \x1B[32m\"node version : \"");
+    system("node -v");
+    system("echo \x1B[32m\"npm version : \"");
+    system("npm -v");
+}
+
+void ohmyzsh_installer(){
+
+    system("sudo apt install git");
+    system("sudo apt install zsh");
+    system("sh -c \"$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)\"");
+
+}
+
 void updator(){
 
     system("sudo apt install git");
@@ -251,14 +277,4 @@ void updator(){
     system("sleep 5");
     printf("%spck3r updated \n",GRN);
  
-}
-
-void clear(){system("clear");}
-
-void ohmyzsh_installer(){
-
-    system("sudo apt install git");
-    system("sudo apt install zsh");
-    system("sh -c \"$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)\"");
-
 }
