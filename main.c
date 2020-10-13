@@ -47,6 +47,9 @@
     void clear();
     void node_installer();
     void ohmyzsh_installer();
+    void sys_update();
+    void sys_upgrade();
+    void sys_updgr();
 ///////////////////////
 int main ( int argc , char *argv[]){
 
@@ -219,6 +222,49 @@ int main ( int argc , char *argv[]){
                break;
             }
 
+            /*
+             * 
+             * if arg[1] == "sys"
+             * wait for arg[2]
+             * valid args after "sys" :
+             * "update", "upgrade", "updgr(update and upgrade) "
+             *  
+             */
+            
+            else if(strcmp(argv[1], "sys")==0){
+
+                /*
+                 * if arg[2] == "update"
+                 * like this => $ pck3r sys update
+                 */
+
+                if (strcmp(argv[2], "update")==0){
+                    sys_update();
+                }
+                
+                /*
+                 * if arg[2] == "upgrade"
+                 * like this => $ pck3r sys upgrade
+                 */
+                
+                else if (strcmp(argv[2], "upgrade")==0){
+                    sys_upgrade();
+                }
+                
+                /*
+                 *
+                 * if arg[2] == "updgr"
+                 * like this => $ pck3r sys updgr
+                 * 
+                 */
+                
+                else if (strcmp(argv[2], "updgr")==0){
+                    sys_updgr();
+                }
+
+            }
+
+
             else{
                 printf("%sCommand not found ! \n",RED);
                 break;
@@ -256,6 +302,7 @@ void ohmyzsh_installer(){
     system("sh -c \"$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)\"");
 
 }
+
 /*
  * updator for install update form 
  * github.com/amzy-0/pck3r
@@ -263,14 +310,52 @@ void ohmyzsh_installer(){
  * automatic install pck3r into the /bin DIRECTORY
  * pck3r clone to  : ~/pck3r 
  */
+
 void updator(){
+
+    /*
+     *
+     * change text color to YELLOW
+     * then, 
+     * install git 
+     * 
+     */
 
     system("echo \x1B[33m");
     system("sudo apt install git");
+    
+    /*
+     *
+     * change directory to home
+     * 
+     */
+    
     char* home = getenv("HOME");
     chdir(home);
+    
+    /*
+     * pwd : show path ...
+     */
+
     system("pwd");
+
+    /*
+     *
+     * clone pck3r to : home directory
+     * and create a remote for update the pck3r source code
+     *  
+     */
+
     system("git clone https://github.com/amzy-0/pck3r");
+    
+    /*
+     * 
+     * move all pck3r [directory] to hidden directory :
+     * [~/pck3r -> ~/.pck3r]
+     * and change directory to "./pck3r"
+     *  
+     */
+
     system("sudo mv pck3r .pck3r");
     chdir(".pck3r");
     system("pwd");
@@ -288,6 +373,51 @@ void updator(){
     system("sudo apt install curl");
     system("sudo apt install libgtk-3-dev");
     system("sleep 5");
+    /*
+     * 
+     * when update done , 
+     * print (with :: printf() function )
+     * output : "pck3r updated "
+     * 
+     */
+
     printf("%spck3r updated \n",GRN);
  
 }
+
+/*
+ *
+ * $ pck3r sys update 
+ * (update for UBUNTU )
+ * 
+ */
+
+ void sys_update(){
+     system("sudo apt update");
+ }
+
+/*
+ *
+ * $ pck3r sys upgrade 
+ * (upgrade for UBUNTU )
+ * 
+ */
+
+ void sys_upgrade(){
+     system("sudo apt full-upgrade");
+ }
+
+
+/*
+ *
+ * $ pck3r sys updgr
+ * both with one command
+ * (update & upgrade for UBUNTU )
+ * 
+ */
+
+ void sys_updgr(){
+     system("sudo apt update && sudo apt full-upgrade");
+ }
+ 
+ 
