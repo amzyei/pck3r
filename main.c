@@ -431,8 +431,7 @@ void updator(){
         
         system("./makefile");
         system("sudo rm -r  /bin/pck3r");
-        system("sudo rm -r  /bin/pck3r-help");
-        system("echo \x1B[32m old version of pck3r removed");
+        system("sudo ./remover");
         system("sudo cp -r pck3r /bin/");
         system("echo pck3r copied ...");
         system("sudo cp -r pck3r-help /bin/");
