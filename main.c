@@ -256,7 +256,13 @@ void ohmyzsh_installer(){
     system("sh -c \"$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)\"");
 
 }
-
+/*
+ * updator for install update form 
+ * github.com/amzy-0/pck3r
+ * and then update source and 
+ * automatic install pck3r into the /bin DIRECTORY
+ * pck3r clone to  : ~/pck3r 
+ */
 void updator(){
 
     system("echo \x1B[33m");
@@ -265,14 +271,17 @@ void updator(){
     chdir(home);
     system("pwd");
     system("git clone https://github.com/amzy-0/pck3r");
-    system("mv pck3r .pck3r");
+    system("sudo mv pck3r .pck3r");
+    chdir(".pck3r");
     system("pwd");
+    system("ls");
     system("git remote add pck3r  https://github.com/amzy-0/pck3r");
     system("git fetch pck3r");
     system("git merge pck3r/master master");
-    system("sudo cp -r pck3r /usr/bin/");
+
+    system("sudo cp -r pck3r /bin/");
     system("echo pck3r copied ...");
-    system("sudo cp -r pck3r-help /usr/bin/");
+    system("sudo cp -r pck3r-help /bin/");
     system("echo pak3r-help copied ...");
     system("echo pck3r dependences ...");
     system("sudo apt install wget");

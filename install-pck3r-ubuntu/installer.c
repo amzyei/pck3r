@@ -14,9 +14,9 @@ static void Pck3r_installer (GtkWidget *wid, GtkWidget *win){
 
 static void install_pck3r (GtkWidget *wid, GtkWidget *win){
   GtkWidget *dialog_after_install = NULL;
-    system("sudo cp -r ../pck3r /usr/bin/");
+    system("sudo cp -r ../pck3r /bin/");
     system("echo pck3r copied ...");
-    system("sudo cp -r ../pck3r-help /usr/bin/");
+    system("sudo cp -r ../pck3r-help /bin/");
     system("echo pak3r-help copied ...");
     system("echo pck3r dependences ...");
     system("sudo apt install wget");
@@ -35,7 +35,7 @@ static void install_pck3r (GtkWidget *wid, GtkWidget *win){
 int main (int argc, char *argv[]){
  /*
   *
-  * superuser is require ! 
+  * superuser is require !
   * for copy all executable file to /bin
   *
   */
