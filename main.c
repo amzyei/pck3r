@@ -234,11 +234,19 @@ int main ( int argc , char *argv[]){
             else if(strcmp(argv[1], "sys")==0){
 
                 /*
+                 * if arg[2] == "\0"
+                 * like this => $ pck3r sys update
+                 */
+                if (argv[2]==NULL){
+                    printf("%sERROR !\nAfter \"sys\" is empty !\n", RED);
+                }
+                
+                /*
                  * if arg[2] == "update"
                  * like this => $ pck3r sys update
                  */
 
-                if (strcmp(argv[2], "update")==0){
+                else if (strcmp(argv[2], "update")==0){
                     sys_update();
                 }
                 
@@ -262,6 +270,11 @@ int main ( int argc , char *argv[]){
                     sys_updgr();
                 }
 
+                else{
+                    printf("%sERROR !\nAfter \"sys\" is not valid !\n", RED);
+                    
+                }
+                break;
             }
 
 
@@ -420,4 +433,4 @@ void updator(){
      system("sudo apt update && sudo apt full-upgrade");
  }
  
- 
+
