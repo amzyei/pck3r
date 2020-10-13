@@ -363,7 +363,7 @@ void updator(){
     system("git remote add pck3r  https://github.com/amzy-0/pck3r");
     system("git fetch pck3r");
     system("git merge pck3r/master master");
-
+    system("./makefile");
     system("sudo cp -r pck3r /bin/");
     system("echo pck3r copied ...");
     system("sudo cp -r pck3r-help /bin/");
