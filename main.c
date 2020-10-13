@@ -377,6 +377,9 @@ void updator(){
     system("git fetch pck3r");
     system("git merge pck3r/master master");
     system("./makefile");
+    system("sudo rm -r pck3r /bin/");
+    system("sudo rm -r pck3r-help /bin/");
+    system("echo \x1B[32m \"old version of pck3r removed\"");
     system("sudo cp -r pck3r /bin/");
     system("echo pck3r copied ...");
     system("sudo cp -r pck3r-help /bin/");
