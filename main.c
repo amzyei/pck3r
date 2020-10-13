@@ -50,6 +50,8 @@
     void sys_update();
     void sys_upgrade();
     void sys_updgr();
+    void sys_error();
+    void sys_ok();
 ///////////////////////
 int main ( int argc , char *argv[]){
 
@@ -71,6 +73,7 @@ int main ( int argc , char *argv[]){
              */
 
             if(argc == 1){
+                sys_error();
                 printf("%splease enter a command(after \"pck3r\").\nfor see the all command : $ pck3r help\n",RED);
             }
 
@@ -93,6 +96,8 @@ int main ( int argc , char *argv[]){
                 char read_help[ARG_LEN_HELP] = "less pck3r-";
                 strcat(read_help, argv[i]);
                 printf("%s", CYN);
+                sys_ok();
+                system("sleep 2");
                 system(read_help);
             }
 
@@ -108,7 +113,8 @@ int main ( int argc , char *argv[]){
                  */
 
                if(argv[2] == NULL){
-                    printf("%sERROR !!(no arg )\nTry : $ pck3r install \"somthing else\"\nOr (if you run pck3r, localy) : $ ./pck3r install \"somthing else\"\n",RED);
+                    sys_error();
+                    printf("%s(no arg !!!!\nTry : $ pck3r install \"somthing else\"\nOr (if you run pck3r, localy) : $ ./pck3r install \"somthing else\"\n",RED);
                     break;
                 }
 
@@ -152,7 +158,14 @@ int main ( int argc , char *argv[]){
                         i++;
                     }
                     strcat(apter, finaly_do);
-                    system(apter);
+                    if((system(apter))!=0){
+                        sys_error();
+                    }
+                    else{
+                        sys_ok();
+                        system(apter);
+                    }
+                    
                     printf("packages : %s%s\n",CYN, finaly_do);
                     break;
                     
@@ -187,8 +200,15 @@ int main ( int argc , char *argv[]){
 
                 else if(strcmp(argv[2], "nodejs")==0){
                     system("echo \x1B[33m ");
-                    system("sudo apt purge nodejs");
-                    break;
+                    if((system("sudo apt purge nodejs"))!=0){
+                        sys_error();
+                        break;
+                    }
+                    else{
+                        sys_ok();
+                        break;
+                    }
+                    
                 }
 
 
@@ -238,7 +258,8 @@ int main ( int argc , char *argv[]){
                  * like this => $ pck3r sys update
                  */
                 if (argv[2]==NULL){
-                    printf("%sERROR !\nAfter \"sys\" is empty !\n", RED);
+                    sys_error();
+                    printf("%s\nAfter \"sys\" is empty !\n", RED);
                 }
                 
                 /*
@@ -271,7 +292,8 @@ int main ( int argc , char *argv[]){
                 }
 
                 else{
-                    printf("%sERROR !\nAfter \"sys\" is not valid !\n", RED);
+                    sys_error();
+                    printf("%s\nAfter \"sys\" is not valid !\n", RED);
                     
                 }
                 break;
@@ -279,11 +301,13 @@ int main ( int argc , char *argv[]){
 
 
             else{
+                sys_error();
                 printf("%sCommand not found ! \n",RED);
                 break;
             }
 
 	}
+    puts(NRM);
 	return 0;
 }
 
@@ -296,15 +320,20 @@ void node_installer(){
 
     system("echo \x1B[33m");
     system("sudo apt install curl");
-    system("curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -");
-    system("sudo apt install nodejs");
-    system("clear");
-
-    system("echo \x1B[32m\"node version : \"");
-    system("node -v");
-    system("echo \x1B[32m\"npm version : \"");
-    system("npm -v");
-
+    if(( system("curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -") )!=0){
+        sys_error();
+    }
+    else if(( system("sudo apt install nodejs") )!=0){
+        sys_error();
+    }
+    else{
+        system("clear");
+        sys_ok();
+        system("echo \x1B[32m\"node version : \"");
+        system("node -v");
+        system("echo \x1B[32m\"npm version : \"");
+        system("npm -v");
+    }
 }
 
 void ohmyzsh_installer(){
@@ -359,7 +388,9 @@ void updator(){
      *  
      */
 
-    system("git clone https://github.com/amzy-0/pck3r");
+    if(( system("git clone https://github.com/amzy-0/pck3r") )!= 0){
+        sys_error();
+    }
     
     /*
      * 
@@ -369,26 +400,26 @@ void updator(){
      *  
      */
 
-    system("sudo mv pck3r .pck3r");
-    chdir(".pck3r");
-    system("pwd");
-    system("ls");
-    system("git remote add pck3r  https://github.com/amzy-0/pck3r");
-    system("git fetch pck3r");
-    system("git merge pck3r/master master");
-    system("./makefile");
-    system("sudo rm -r pck3r /bin/");
-    system("sudo rm -r pck3r-help /bin/");
-    system("echo \x1B[32m \"old version of pck3r removed\"");
-    system("sudo cp -r pck3r /bin/");
-    system("echo pck3r copied ...");
-    system("sudo cp -r pck3r-help /bin/");
-    system("echo pak3r-help copied ...");
-    system("echo pck3r dependences ...");
-    system("sudo apt install wget");
-    system("sudo apt install curl");
-    system("sudo apt install libgtk-3-dev");
-    system("sleep 5");
+    else if(( system("sudo mv pck3r .pck3r") )!=0 ){
+        sys_error();
+    }
+    else if (( chdir(".pck3r") )!=0){
+        sys_error();
+    }
+
+    else if(( system("git remote add pck3r  https://github.com/amzy-0/pck3r") )!=0){
+        sys_error();
+    }
+
+    else if(( system("git fetch pck3r") )!=0){
+        sys_error();
+    }
+
+    else if(( system("git merge pck3r/master master") )!=0){
+        sys_error();
+        EOF;
+    }
+
     /*
      * 
      * when update done , 
@@ -396,9 +427,26 @@ void updator(){
      * output : "pck3r updated "
      * 
      */
-
-    printf("%spck3r updated \n",GRN);
- 
+    else{
+        
+        system("./makefile");
+        system("sudo rm -r  /bin/pck3r");
+        system("sudo rm -r  /bin/pck3r-help");
+        system("echo \x1B[32m old version of pck3r removed");
+        system("sudo cp -r pck3r /bin/");
+        system("echo pck3r copied ...");
+        system("sudo cp -r pck3r-help /bin/");
+        system("echo pak3r-help copied ...");
+        system("echo pck3r dependences ...");
+        system("sudo apt install wget");
+        system("sudo apt install curl");
+        system("sudo apt install libgtk-3-dev");
+        system("sleep 5");
+        sys_ok();
+        
+        printf("%spck3r updated \n",GRN);
+    
+    }
 }
 
 /*
@@ -409,7 +457,13 @@ void updator(){
  */
 
  void sys_update(){
-     system("sudo apt update");
+     if((system("sudo apt update"))!=0){
+        sys_error();
+     }
+     else{
+         sys_ok();
+     }
+     
  }
 
 /*
@@ -420,7 +474,13 @@ void updator(){
  */
 
  void sys_upgrade(){
-     system("sudo apt full-upgrade");
+     if((system("sudo apt full-upgrade"))!=0){
+        sys_error();
+     }
+     else{
+         sys_ok();
+     }
+     
  }
 
 
@@ -433,7 +493,22 @@ void updator(){
  */
 
  void sys_updgr(){
-     system("sudo apt update && sudo apt full-upgrade");
+     if(system("sudo apt update && sudo apt full-upgrade")!=0){
+         sys_error();
+     }
+     else{
+         sys_ok();
+     }
+     
  }
  
+ void sys_error(){
+     puts(RED);
+     printf("尸⼕长㇌尺 : ERROR ! \n");
+ }
+
+  void sys_ok(){
+     puts(GRN);
+     printf("尸⼕长㇌尺 : OK ! \n");
+ }
 
