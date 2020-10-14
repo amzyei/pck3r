@@ -226,21 +226,7 @@ int main ( int argc , char *argv[]){
                 }
             }
 
-            /*
-             * if user want update a program or tools or ...
-             * like this ($ pck3r update)
-             */
 
-            else if(strcmp(argv[1], "update")==0){
-
-                /*
-                 * if argv[2] is null
-                 * like this ($ pck3r update )
-                 */
-
-               updator();
-               break;
-            }
 
             /*
              * 
@@ -290,6 +276,13 @@ int main ( int argc , char *argv[]){
                 else if (strcmp(argv[2], "updgr")==0){
                     sys_updgr();
                 }
+                
+                /*
+                 * 
+                 * if comamnd not valid after sys
+                 * like this : $ pck3r sys {not valid} 
+                 * 
+                 */
 
                 else{
                     sys_error();
@@ -299,7 +292,47 @@ int main ( int argc , char *argv[]){
                 break;
             }
 
+            else if(strcmp(argv[1], "dwn")==0){
+                if(argv[2]==NULL){
+                    sys_error();
+                    puts(RED);
+                    puts("After \"dwn\" is empty " );
+                }
 
+                /*
+                 * 
+                 * else if 
+                 * if after $ pck3r dwn "\0"
+                 * 
+                 */
+                
+                else if (argv[2]!=NULL){
+                    char link[2000] = "wget ";
+                    strcat(link, argv[2]);
+                    if(( system(link) )!=0){
+                        sys_error();
+                    }
+                    
+                    
+                    else
+                    {
+                        sys_ok();
+                        puts(GRN);
+                        puts("downloaded ! (location : )");
+                        system("pwd");
+                    }
+                    
+                }
+                
+                break;
+            }
+
+            /*
+             * 
+             * if command after pck3r not valid
+             * 
+             */
+            
             else{
                 sys_error();
                 printf("%sCommand not found ! \n",RED);
@@ -345,111 +378,7 @@ void ohmyzsh_installer(){
 
 }
 
-/*
- * updator for install update form 
- * github.com/amzy-0/pck3r
- * and then update source and 
- * automatic install pck3r into the /bin DIRECTORY
- * pck3r clone to  : ~/pck3r 
- */
 
-void updator(){
-
-    /*
-     *
-     * change text color to YELLOW
-     * then, 
-     * install git 
-     * 
-     */
-
-    system("echo \x1B[33m");
-    system("sudo apt install git");
-    
-    /*
-     *
-     * change directory to home
-     * 
-     */
-    
-    char* home = getenv("HOME");
-    chdir(home);
-    
-    /*
-     * pwd : show path ...
-     */
-
-    system("pwd");
-    system("sudo rm -r pck3r ");
-    system("sudo rm -r .pck3r ");
-    system("sudo rm -r /bin/pck3r ");
-    system("sudo rm -r /bin/pck3r-help ");
-
-    /*
-     *
-     * clone pck3r to : home directory
-     * and create a remote for update the pck3r source code
-     *  
-     */
-    
-    if(( system("git clone https://github.com/amzy-0/pck3r") )!= 0){
-        sys_error();
-    }
-    
-    /*
-     * 
-     * move all pck3r [directory] to hidden directory :
-     * [~/pck3r -> ~/.pck3r]
-     * and change directory to "./pck3r"
-     *  
-     */
-
-    else if(( system("sudo mv pck3r .pck3r") )!=0 ){
-        sys_error();
-    }
-    else if (( chdir(".pck3r") )!=0){
-        sys_error();
-    }
-
-    else if(( system("git remote add pck3r  https://github.com/amzy-0/pck3r") )!=0){
-        sys_error();
-    }
-
-    else if(( system("git fetch pck3r") )!=0){
-        sys_error();
-    }
-
-    else if(( system("git merge pck3r/master master") )!=0){
-        sys_error();
-        EOF;
-    }
-
-    /*
-     * 
-     * when update done , 
-     * print (with :: printf() function )
-     * output : "pck3r updated "
-     * 
-     */
-    else{
-        
-        system("./makefile");
-        system("sudo ./remover");
-        system("sudo cp -r pck3r /bin/");
-        system("echo pck3r copied ...");
-        system("sudo cp -r pck3r-help /bin/");
-        system("echo pak3r-help copied ...");
-        system("echo pck3r dependences ...");
-        system("sudo apt install wget");
-        system("sudo apt install curl");
-        system("sudo apt install libgtk-3-dev");
-        system("sleep 5");
-        sys_ok();
-        
-        printf("%spck3r updated \n",GRN);
-    
-    }
-}
 
 /*
  *
@@ -458,7 +387,7 @@ void updator(){
  * 
  */
 
- void sys_update(){
+void sys_update(){
      if((system("sudo apt update"))!=0){
         sys_error();
      }
@@ -475,7 +404,7 @@ void updator(){
  * 
  */
 
- void sys_upgrade(){
+void sys_upgrade(){
      if((system("sudo apt full-upgrade"))!=0){
         sys_error();
      }
@@ -494,7 +423,7 @@ void updator(){
  * 
  */
 
- void sys_updgr(){
+void sys_updgr(){
      if(system("sudo apt update && sudo apt full-upgrade")!=0){
          sys_error();
      }
@@ -503,13 +432,28 @@ void updator(){
      }
      
  }
+
+ /*
+  * 
+  * error function for error 
+  * anywhere
+  * 
+  */
  
- void sys_error(){
+void sys_error(){
      puts(RED);
      printf("尸⼕长㇌尺 : ERROR ! \n");
  }
 
-  void sys_ok(){
+/*
+ * 
+ * ok function 
+ * when opration is done without problem.
+ * call this function
+ * 
+ */
+
+void sys_ok(){
      puts(GRN);
      printf("尸⼕长㇌尺 : OK ! \n");
  }
