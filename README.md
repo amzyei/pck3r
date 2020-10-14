@@ -49,4 +49,5 @@ good luck...
 
 # install pck3r  global 
 
-$ ./install 
+$ cd install-pck3r-ubuntu/
+$ ./installer
