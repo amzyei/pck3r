@@ -26,7 +26,9 @@ good luck...
 </pre>
 
 
+
 "install" command :
+    
     $ pck3r install "somthing" :
     {
             nodejs,
@@ -38,11 +40,13 @@ good luck...
     }
 
 "clear" command :
-    pck3r clear:
+    
+    $ pck3r clear:
     {clear your terminal }
 
 "iso" command : 
-   $ pck3r iso 32/64  "somthing":
+    
+    $ pck3r iso 32/64  "somthing":
     {
         mint,
         fedora,
@@ -51,11 +55,30 @@ good luck...
     }
 
 "dwn" command :
-  $ pck3r dwn "https/http://somthing"
+    
+    $ pck3r dwn "https/http://somthing"
     {dwn is downloader for pck3r }
+
+"sys" command : 
+    
+    $ pck3r sys update 
+    (update your oprating system)
+    
+    $ pck3r sys upgrade
+    (upgrade your oprating system)
+    
+    $ pck3r updgr
+    (both, update and upgrade (full upgrade))
+
 
 # install pck3r  global 
 
 $ cd install-pck3r-ubuntu/
 
 $ ./installer
+
+# update pck3r 
+
+$ cd updator/
+
+$ ./updator
