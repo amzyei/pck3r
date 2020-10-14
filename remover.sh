@@ -1,4 +1,6 @@
 #!/bin/bash
+sudo rm -r ~/.pck3r
+sudo rm -r ~/pck3r
 sudo rm -r /bin/pck3r
 sudo rm -r  /bin/pck3r-help
 echo \x1B[32m old version of pck3r removed
