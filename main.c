@@ -380,6 +380,10 @@ void updator(){
      */
 
     system("pwd");
+    system("sudo rm -r pck3r ");
+    system("sudo rm -r .pck3r ");
+    system("sudo rm -r /bin/pck3r ");
+    system("sudo rm -r /bin/pck3r-help ");
 
     /*
      *
@@ -387,7 +391,7 @@ void updator(){
      * and create a remote for update the pck3r source code
      *  
      */
-
+    
     if(( system("git clone https://github.com/amzy-0/pck3r") )!= 0){
         sys_error();
     }
@@ -430,7 +434,6 @@ void updator(){
     else{
         
         system("./makefile");
-        system("sudo rm -r  /bin/pck3r");
         system("sudo ./remover");
         system("sudo cp -r pck3r /bin/");
         system("echo pck3r copied ...");
