@@ -1,0 +1,52 @@
+-----------------------------------------
+|                                       |
+| pck3r : It is a versatile program and |
+|                                       |
+| you avoid using useless commands and  |
+|                                       |
+| it is written for Ubuntu...           |
+|                                       |
+-----------------------------------------
+
+"install" command :
+    
+    $ pck3r install "somthing" :
+    {
+            nodejs,
+            python3pip,
+            java,
+            wine,
+            ohmyzsh,
+            or ...
+    }
+
+"clear" command :
+    
+    $ pck3r clear:
+    {clear your terminal }
+
+"iso" command : 
+    
+    $ pck3r iso 32/64  "somthing":
+    {
+        mint,
+        fedora,
+        gentoo,
+        or ...
+    }
+
+"dwn" command :
+    
+    $ pck3r dwn "https/http://somthing"
+    {dwn is downloader for pck3r }
+
+"sys" command : 
+    
+    $ pck3r sys update 
+    (update your oprating system)
+    
+    $ pck3r sys upgrade
+    (upgrade your oprating system)
+    
+    $ pck3r updgr
+    (both, update and upgrade (full upgrade))
