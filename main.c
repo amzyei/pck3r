@@ -151,13 +151,13 @@ int main ( int argc , char *argv[]){
                 else{
                     i=2;
                     char apter[1000] = "sudo apt install ";
-                    char finaly_do[1000] = {"\0"}; 
+                    char finally_do[1000] = {"\0"};
                     while (argv[i]!=NULL){
-                        strcat(finaly_do, argv[i]);
-                        strcat(finaly_do, " ");
+                        strcat(finally_do, argv[i]);
+                        strcat(finally_do, " ");
                         i++;
                     }
-                    strcat(apter, finaly_do);
+                    strcat(apter, finally_do);
                     if((system(apter))!=0){
                         sys_error();
                     }
@@ -165,10 +165,10 @@ int main ( int argc , char *argv[]){
                         sys_ok();
                         system(apter);
                     }
-                    
-                    printf("packages : %s%s\n",CYN, finaly_do);
+
+                    printf("packages : %s%s\n",CYN, finally_do);
                     break;
-                    
+
                 }
 
             }
@@ -208,7 +208,7 @@ int main ( int argc , char *argv[]){
                         sys_ok();
                         break;
                     }
-                    
+
                 }
 
 
@@ -217,11 +217,11 @@ int main ( int argc , char *argv[]){
                  */
 
                 else if(argv[2]!=NULL){
-                    char finaly_do[200] = "sudo apt purge ";
+                    char finally_do[200] = "sudo apt purge ";
                     printf("%sremoving %s !\n",YEL, argv[2]);
-                    strcat(finaly_do, argv[2]);
+                    strcat(finally_do, argv[2]);
                     system("echo \x1B[33m ");
-                    system(finaly_do);
+                    system(finally_do);
                     break;
                 }
             }
@@ -229,14 +229,14 @@ int main ( int argc , char *argv[]){
 
 
             /*
-             * 
+             *
              * if arg[1] == "sys"
              * wait for arg[2]
              * valid args after "sys" :
              * "update", "upgrade", "updgr(update and upgrade) "
-             *  
+             *
              */
-            
+
             else if(strcmp(argv[1], "sys")==0){
 
                 /*
@@ -247,7 +247,7 @@ int main ( int argc , char *argv[]){
                     sys_error();
                     printf("%s\nAfter \"sys\" is empty !\n", RED);
                 }
-                
+
                 /*
                  * if arg[2] == "update"
                  * like this => $ pck3r sys update
@@ -256,38 +256,38 @@ int main ( int argc , char *argv[]){
                 else if (strcmp(argv[2], "update")==0){
                     sys_update();
                 }
-                
+
                 /*
                  * if arg[2] == "upgrade"
                  * like this => $ pck3r sys upgrade
                  */
-                
+
                 else if (strcmp(argv[2], "upgrade")==0){
                     sys_upgrade();
                 }
-                
+
                 /*
                  *
                  * if arg[2] == "updgr"
                  * like this => $ pck3r sys updgr
-                 * 
+                 *
                  */
-                
+
                 else if (strcmp(argv[2], "updgr")==0){
                     sys_updgr();
                 }
-                
+
                 /*
-                 * 
+                 *
                  * if comamnd not valid after sys
-                 * like this : $ pck3r sys {not valid} 
-                 * 
+                 * like this : $ pck3r sys {not valid}
+                 *
                  */
 
                 else{
                     sys_error();
                     printf("%s\nAfter \"sys\" is not valid !\n", RED);
-                    
+
                 }
                 break;
             }
@@ -300,20 +300,20 @@ int main ( int argc , char *argv[]){
                 }
 
                 /*
-                 * 
-                 * else if 
+                 *
+                 * else if
                  * if after $ pck3r dwn "\0"
-                 * 
+                 *
                  */
-                
+
                 else if (argv[2]!=NULL){
                     char link[2000] = "wget ";
                     strcat(link, argv[2]);
                     if(( system(link) )!=0){
                         sys_error();
                     }
-                    
-                    
+
+
                     else
                     {
                         sys_ok();
@@ -321,18 +321,18 @@ int main ( int argc , char *argv[]){
                         puts("downloaded ! (location : )");
                         system("pwd");
                     }
-                    
+
                 }
-                
+
                 break;
             }
 
             /*
-             * 
+             *
              * if command after pck3r not valid
-             * 
+             *
              */
-            
+
             else{
                 sys_error();
                 printf("%sCommand not found ! \n",RED);
@@ -382,9 +382,9 @@ void ohmyzsh_installer(){
 
 /*
  *
- * $ pck3r sys update 
+ * $ pck3r sys update
  * (update for UBUNTU )
- * 
+ *
  */
 
 void sys_update(){
@@ -394,14 +394,14 @@ void sys_update(){
      else{
          sys_ok();
      }
-     
+
  }
 
 /*
  *
- * $ pck3r sys upgrade 
+ * $ pck3r sys upgrade
  * (upgrade for UBUNTU )
- * 
+ *
  */
 
 void sys_upgrade(){
@@ -411,7 +411,7 @@ void sys_upgrade(){
      else{
          sys_ok();
      }
-     
+
  }
 
 
@@ -420,7 +420,7 @@ void sys_upgrade(){
  * $ pck3r sys updgr
  * both with one command
  * (update & upgrade for UBUNTU )
- * 
+ *
  */
 
 void sys_updgr(){
@@ -430,27 +430,27 @@ void sys_updgr(){
      else{
          sys_ok();
      }
-     
+
  }
 
  /*
-  * 
-  * error function for error 
+  *
+  * error function for error
   * anywhere
-  * 
+  *
   */
- 
+
 void sys_error(){
      puts(RED);
      printf("尸⼕长㇌尺 : ERROR ! \n");
  }
 
 /*
- * 
- * ok function 
+ *
+ * ok function
  * when opration is done without problem.
  * call this function
- * 
+ *
  */
 
 void sys_ok(){
