@@ -163,7 +163,7 @@ int main ( int argc , char *argv[]){
                     }
                     else{
                         sys_ok();
-                        system(apter);
+                        printf("%s installed \n",finally_do);
                     }
 
                     printf("packages : %s%s\n",CYN, finally_do);
@@ -243,6 +243,7 @@ int main ( int argc , char *argv[]){
                  * if arg[2] == "\0"
                  * like this => $ pck3r sys update
                  */
+
                 if (argv[2]==NULL){
                     sys_error();
                     printf("%s\nAfter \"sys\" is empty !\n", RED);
@@ -350,17 +351,55 @@ void clear(){system("clear");}
 
 void node_installer(){
 
+    /*
+     *
+     * change color (forground color ) to yellow
+     *
+     */
 
     system("echo \x1B[33m");
+
+    /*
+     *
+     * install curl, is require ...
+     *
+     */
+
     system("sudo apt install curl");
+
     if(( system("curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -") )!=0){
+
+        /*
+         * if can not connect to https://deb.nodesource.com/ ,
+         * print error
+         * and break ...
+         */
+
         sys_error();
     }
     else if(( system("sudo apt install nodejs") )!=0){
+
+        /*
+         * print error if node not installed ...
+         */
+
         sys_error();
     }
     else{
+
+        /*
+         * clear, terminal
+         */
+
         system("clear");
+
+        /*
+         * if node is ready for install
+         * print sys_ok(); function,
+         * and print node and nmp version
+         *
+         */
+
         sys_ok();
         system("echo \x1B[32m\"node version : \"");
         system("node -v");
@@ -441,6 +480,11 @@ void sys_updgr(){
   */
 
 void sys_error(){
+
+    /*
+     * error
+     */
+
      puts(RED);
      printf("尸⼕长㇌尺 : ERROR ! \n");
  }
@@ -454,6 +498,11 @@ void sys_error(){
  */
 
 void sys_ok(){
+
+     /*
+      * no error
+      */
+
      puts(GRN);
      printf("尸⼕长㇌尺 : OK ! \n");
  }
