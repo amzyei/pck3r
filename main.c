@@ -43,6 +43,7 @@
 
 ////////////////////////
     //functions
+////////////////////////
     void updator();
     void clear();
     void node_installer();
@@ -52,6 +53,8 @@
     void sys_updgr();
     void sys_error();
     void sys_ok();
+    void version();
+    void wine_installer();
 ///////////////////////
 int main ( int argc , char *argv[]){
 
@@ -144,7 +147,17 @@ int main ( int argc , char *argv[]){
                     * || like this ($ pck3r install ohmyzsh )
                     */
                     ohmyzsh_installer();
-                    printf("%sZSH installed \n", GRN);
+                    
+                    break;
+                }
+                else if(strcmp(argv[2], "wine")==0){
+
+                    /*
+                    * if argv[2] not null
+                    * || like this ($ pck3r install ohmyzsh )
+                    */
+                    wine_installer();
+                    
                     break;
                 }
 
@@ -329,6 +342,17 @@ int main ( int argc , char *argv[]){
             }
 
             /*
+             * version 
+             */
+
+            else if(strcmp(argv[1], "version")==0){
+                version();
+                puts("");
+                break;
+                
+            }
+
+            /*
              *
              * if command after pck3r not valid
              *
@@ -410,10 +434,29 @@ void node_installer(){
 
 void ohmyzsh_installer(){
 
-    system("echo \x1B[33m");
-    system("sudo apt install git");
-    system("sudo apt install zsh");
-    system("sh -c \"$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)\"");
+    if(( system("echo \x1B[33m") )!=0){
+            sys_error();
+            return;
+    }
+    else if ((system("sudo apt install git") )!=0){
+        sys_error();
+        return;
+    }
+    else if(( system("sudo apt install zsh") )!=0){
+        sys_error();
+        return;
+    }
+
+    else if(( system("sh -c \"$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)\"") )!=0){
+        sys_error();
+        return;
+    }
+    else{
+        sys_ok();
+        printf("%sZSH installed \n", GRN);
+        system("zsh -V");
+    }
+    
 
 }
 
@@ -431,7 +474,8 @@ void sys_update(){
         sys_error();
      }
      else{
-         sys_ok();
+        sys_ok();
+        printf("%syour oprating system is upgrade", GRN);
      }
 
  }
@@ -449,6 +493,14 @@ void sys_upgrade(){
      }
      else{
          sys_ok();
+         printf("%syour oprating system is upgraded \n", GRN);
+         system("lsb_release -a ");
+         system("echo your oprating system information : ");
+         system("uname -a ");
+         system("echo your machine architecture : ");
+         system("uname -p");
+
+
      }
 
  }
@@ -468,6 +520,14 @@ void sys_updgr(){
      }
      else{
          sys_ok();
+         printf("%syour oprating system is updated and upgraded \n", GRN);
+         system("lsb_release -a ");
+         system("echo your oprating system information : ");
+         system("uname -a ");
+         system("echo your machine architecture : ");
+         system("uname -p");
+         puts(WHT);
+         system("sudo apt autoremove");         
      }
 
  }
@@ -507,3 +567,71 @@ void sys_ok(){
      printf("尸⼕长㇌尺 : OK ! \n");
  }
 
+void version(){
+    puts(GRN);
+    printf("version : 1.0"); 
+}
+
+/*
+ * 
+ * wine installer function for install wine 
+ * and use wine and install it, 
+ * for your oprating system 
+ * use this function and you can change function name, 
+ * if you want to rename function, 
+ * and change this code for your self ... 
+ * 
+ */
+
+void wine_installer(){
+
+            if(( system("sudo dpkg --add-architecture i386 "))!=0){
+                sys_error();
+                return;
+            }
+            else if (( system("wget -nc https://dl.winehq.org/wine-builds/winehq.key"))!=0){
+                sys_error();
+                return;
+            }
+            
+            else if(( system("sudo apt-key add winehq.key") )!=0){
+                sys_error();
+                return;
+            }
+            
+            else if(( system("sudo apt update && sudo apt full-upgrade -y"))!=0){
+                sys_error();
+                return;
+            }
+
+            else if(( system("sudo apt install --install-recommends winehq-stable"))!=0){
+                sys_error();
+                return;
+            }
+
+            
+            else if (( system("sudo add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main'"))!=0){
+                sys_error();
+                return;
+            }
+            else if (( system("sudo add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main'"))!=0){
+                sys_error();
+                return;
+            }
+            
+            else if(( system("sudo apt update && sudo apt full-upgrade - y"))!=0){
+                sys_error();
+                return;
+            }
+
+            else if(( system("sudo apt install --install-recommends winehq-stable"))!=0){
+                sys_error();
+                return;
+            }
+            
+            else{
+                sys_ok();
+                printf("%sWine installed ! (18.04 and 20.04) ",GRN);
+
+            }
+}
