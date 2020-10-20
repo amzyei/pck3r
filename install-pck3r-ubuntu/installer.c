@@ -62,20 +62,20 @@ int main (int argc, char *argv[]){
   g_signal_connect (win, "destroy", gtk_main_quit, NULL);
 
   /* Create a vertical box with buttons */
-  vbox = gtk_vbox_new (TRUE, 6);
+  vbox = gtk_vbox_new (FALSE, 6);
   gtk_container_add (GTK_CONTAINER (win), vbox);
 
   button = gtk_button_new_with_label("install pack3r");
   g_signal_connect (G_OBJECT (button), "clicked", G_CALLBACK (install_pck3r), (gpointer) win);
-  gtk_box_pack_start (GTK_BOX (vbox), button, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (vbox), button, TRUE, FALSE, 0);
 
   button = gtk_button_new_from_stock (GTK_STOCK_DIALOG_INFO);
   g_signal_connect (G_OBJECT (button), "clicked", G_CALLBACK (Pck3r_installer), (gpointer) win);
-  gtk_box_pack_start (GTK_BOX (vbox), button, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (vbox), button, TRUE, FALSE, 0);
 
   button = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
   g_signal_connect (button, "clicked", gtk_main_quit, NULL);
-  gtk_box_pack_start (GTK_BOX (vbox), button, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (vbox), button, TRUE, FALSE, 0);
 
   /* Enter the main loop */
   gtk_widget_show_all (win);
