@@ -73,11 +73,14 @@ good luck...
 
 # install pck3r  global 
 
+
 $ cd install-pck3r-ubuntu/
 
 $ ./installer
 
+
 # update pck3r 
+
 
 $ cd updator/
 
