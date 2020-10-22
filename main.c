@@ -22,7 +22,7 @@
  * 2-define color
  */
 
-#define ARG_LEN_HELP 17
+#define ARG_LEN_HELP 14
 
 ////////////////////////
     //color zone
@@ -94,14 +94,15 @@ int main ( int argc , char *argv[]){
 
 			else if(strcmp(argv[1], "help")==0){
                 /*
-                * read help (run : less pck3r-help)
+                * read help (run : ./pck3r-help)
                 */
-                char read_help[ARG_LEN_HELP] = "less pck3r-";
-                strcat(read_help, argv[i]);
+                char read_help[ARG_LEN_HELP] = "./pck3r-";
+                strcat(read_help, argv[1]);
                 printf("%s", CYN);
                 sys_ok();
                 system("sleep 2");
                 system(read_help);
+                break;
             }
 
             /*
@@ -635,3 +636,4 @@ void wine_installer(){
 
             }
 }
+
