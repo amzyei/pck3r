@@ -361,12 +361,17 @@ int main ( int argc , char *argv[]){
              * novice can use this ... 
              */
 
-            else if(strcmp(argv[1], "terminal")==0){
-                if (( system("./pck3r-terminal-emu") )==0){
+            else if(strcmp(argv[1], "term")==0){
+                if (strcmp(argv[0], "./pck3r")==0 && ( system("./pck3r-terminal-emu") )==0){
                     sys_ok();
-                    printf("terminal started!!!!\n");
+                    printf("terminal started  !!!!\n");
+                }
+                else if(strcmp(argv[0],"pck3r")==0 && ( system("pck3r-terminal-emu") )==0){
+                    sys_ok();
+                    printf("terminal started  !!!!\n");
                 }
                 else{
+
                     sys_error(); 
                     printf("pck3r-terminal-emu [FILE] not found !!\n");
                     printf("please update your pack3r...\n");
