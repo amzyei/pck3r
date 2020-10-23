@@ -101,8 +101,7 @@ int main ( int argc , char *argv[]){
                     strcat(read_help, argv[1]);
                     printf("%s", CYN);
                     system("sleep 2");
-                    if(( system(read_help))){printf("you are run pack3r localy ! \n");break;}
-                    else{system("python3 /bin/pck3r-help");break;}
+                    if(( system(read_help) )==0){sys_ok(); break;}
                     break;
             }
 
