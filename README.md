@@ -78,7 +78,7 @@ good luck...
 
 "term" command :
 
-    $pck3r term
+    $ pck3r term
     (command for run, pck3r terminal emulator)
 
 
