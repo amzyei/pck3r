@@ -77,6 +77,7 @@ good luck...
     (both, update and upgrade (full upgrade))
 
 "term" command :
+
     $pck3r term
     (command for run, pck3r terminal emulator)
 
