@@ -69,22 +69,49 @@ int main (int argc, char *argv[]){
   win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_container_set_border_width (GTK_CONTAINER (win), 8);
   gtk_window_set_title (GTK_WINDOW (win), "pck3r updator");
+  /*
+   * window position = center
+   */
   gtk_window_set_position (GTK_WINDOW (win), GTK_WIN_POS_CENTER);
   gtk_widget_realize (win);
   g_signal_connect (win, "destroy", gtk_main_quit, NULL);
 
-  /* Create a vertical box with buttons */
+  /*
+   *
+   * Create a vertical box with buttons 
+   *
+   */
+
   vbox = gtk_vbox_new (FALSE, 6);
+  //
   gtk_container_add (GTK_CONTAINER (win), vbox);
+  /*
+   * resize disable
+   */
+  gtk_window_set_default_size(GTK_WINDOW(win), 400, 300);
+  gtk_window_set_resizable (GTK_WINDOW(win), FALSE);
+  
+  /*
+   * update btn with signal
+   */
 
   button = gtk_button_new_with_label("update pck3r");
   g_signal_connect (G_OBJECT (button), "clicked", G_CALLBACK (update_pck3r), (gpointer) win);
   gtk_box_pack_start (GTK_BOX (vbox), button, TRUE, FALSE, 0);
-
+  
+  /*
+   * infomation btn with signal
+   */
+  
   button = gtk_button_new_from_stock (GTK_STOCK_DIALOG_INFO);
   g_signal_connect (G_OBJECT (button), "clicked", G_CALLBACK (Pck3r_update), (gpointer) win);
   gtk_box_pack_start (GTK_BOX (vbox), button, TRUE, FALSE, 0);
 
+    
+  /*
+   * close btn with signal
+   */
+  
   button = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
   g_signal_connect (button, "clicked", gtk_main_quit, NULL);
   gtk_box_pack_start (GTK_BOX (vbox), button, TRUE, FALSE, 0);
@@ -93,4 +120,5 @@ int main (int argc, char *argv[]){
   gtk_widget_show_all (win);
   gtk_main ();
   return 0;
+  
 }

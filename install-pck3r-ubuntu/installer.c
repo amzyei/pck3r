@@ -76,14 +76,32 @@ int main (int argc, char *argv[]){
   /* Create a vertical box with buttons */
   vbox = gtk_vbox_new (FALSE, 6);
   gtk_container_add (GTK_CONTAINER (win), vbox);
+  
+  /*
+   * resize disable
+   */
+  
+  gtk_window_set_default_size(GTK_WINDOW(win), 400, 300);
+  gtk_window_set_resizable (GTK_WINDOW(win), FALSE);
 
+  /*
+   * install btn with signal 
+   */
   button = gtk_button_new_with_label("install pack3r");
   g_signal_connect (G_OBJECT (button), "clicked", G_CALLBACK (install_pck3r), (gpointer) win);
   gtk_box_pack_start (GTK_BOX (vbox), button, TRUE, FALSE, 0);
-
+  
+  /*
+   * information button 
+   */
+  
   button = gtk_button_new_from_stock (GTK_STOCK_DIALOG_INFO);
   g_signal_connect (G_OBJECT (button), "clicked", G_CALLBACK (Pck3r_installer), (gpointer) win);
   gtk_box_pack_start (GTK_BOX (vbox), button, TRUE, FALSE, 0);
+
+  /*
+   * close button 
+   */
 
   button = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
   g_signal_connect (button, "clicked", gtk_main_quit, NULL);

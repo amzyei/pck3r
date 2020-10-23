@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 
-print("""
+green = "\x1B[32m"
+
+print("""%s
 -----------------------------------------
 |                                       |
 | pck3r : It is a versatile program and |
@@ -53,4 +55,4 @@ print("""
     
     $ pck3r updgr
     (both, update and upgrade (full upgrade))
-""")
+""" % green)
