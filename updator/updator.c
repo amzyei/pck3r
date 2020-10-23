@@ -20,12 +20,16 @@ static void update_pck3r (GtkWidget *wid, GtkWidget *win){
     system("sudo cp -r ../pck3r .");
     system("sudo cp -r ../pck3r-help .");
     system("sudo cp -r ../pck3r-terminal-emu .");
+
     system("sudo cp -r ./pck3r /bin/");
     system("echo pck3r copied ...");
+
     system("sudo cp -r ./pck3r-help /bin/");
     system("echo pak3r-help copied ...");
-    system("sudo cp -r ../pck3r-terminal-emu .");
+
+    system("sudo cp -r ./pck3r-terminal-emu /bin");
     system("echo pak3r-terminal-emu  copied ...");
+    
     system("echo pck3r dependences ...");
     system("sudo apt install wget");
     system("sudo apt install curl");
