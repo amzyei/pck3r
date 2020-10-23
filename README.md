@@ -76,6 +76,10 @@ good luck...
     $ pck3r updgr
     (both, update and upgrade (full upgrade))
 
+"term" command :
+    $pck3r term
+    (command for run, pck3r terminal emulator)
+
 
 # install pck3r  global 
 
