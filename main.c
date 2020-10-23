@@ -94,15 +94,16 @@ int main ( int argc , char *argv[]){
 
 			else if(strcmp(argv[1], "help")==0){
                 /*
-                * read help (run : ./pck3r-help)
-                */
-                char read_help[ARG_LEN_HELP] = "./pck3r-";
-                strcat(read_help, argv[1]);
-                printf("%s", CYN);
-                sys_ok();
-                system("sleep 2");
-                system(read_help);
-                break;
+                 * read help (run : /bin/pck3r-help)
+                 * 
+                 */
+                    char read_help[ARG_LEN_HELP] = "./pck3r-";
+                    strcat(read_help, argv[1]);
+                    printf("%s", CYN);
+                    system("sleep 2");
+                    if(( system(read_help))){printf("you are run pack3r localy ! \n");break;}
+                    else{system("python3 /bin/pck3r-help");break;}
+                    break;
             }
 
             /*
@@ -349,6 +350,28 @@ int main ( int argc , char *argv[]){
             else if(strcmp(argv[1], "version")==0){
                 version();
                 puts("");
+                break;
+                
+            }
+
+            /*
+             * run terminal emulator 
+             * pck3r terminal [FILE : pck3r-terminal-emu]
+             * is very simple terminal 
+             * novice can use this ... 
+             */
+
+            else if(strcmp(argv[1], "terminal")==0){
+                if (( system("./pck3r-terminal-emu") )==0){
+                    sys_ok();
+                    printf("terminal started!!!!\n");
+                }
+                else{
+                    sys_error(); 
+                    printf("pck3r-terminal-emu [FILE] not found !!\n");
+                    printf("please update your pack3r...\n");
+                }
+                
                 break;
                 
             }
