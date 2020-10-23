@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <sys/unistd.h>
 #include <vte/vte.h>
+
 /*
  * 
  * this code refrence is gtk (gnome tool kit) terminal emulator
@@ -11,6 +12,7 @@
  *      $pck3r terminal  
  * 
  */
+
 static void
 child_ready(VteTerminal *terminal, GPid pid, GError *error, gpointer user_data)
 {
@@ -21,13 +23,13 @@ child_ready(VteTerminal *terminal, GPid pid, GError *error, gpointer user_data)
 int
 main(int argc, char *argv[])
 {
-    GtkWidget *window, *terminal;
+    GtkWidget *win, *terminal;
 
     /* Initialise GTK, the window and the terminal */
     gtk_init(&argc, &argv);
     terminal = vte_terminal_new();
-    window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_title(GTK_WINDOW(window), "pck3r-terminal-emulator");
+    win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+    gtk_window_set_title(GTK_WINDOW(win), "pck3r-terminal-emulator");
 
     /* Start a new shell */
     gchar **envp = g_get_environ();
@@ -46,12 +48,14 @@ main(int argc, char *argv[])
         child_ready,  /* callback */
         NULL);        /* user_data */
 
+    
+
     /* Connect some signals */
-    g_signal_connect(window, "delete-event", gtk_main_quit, NULL);
+    g_signal_connect(win, "delete-event", gtk_main_quit, NULL);
     g_signal_connect(terminal, "child-exited", gtk_main_quit, NULL);
 
     /* Put widgets together and run the main loop */
-    gtk_container_add(GTK_CONTAINER(window), terminal);
-    gtk_widget_show_all(window);
+    gtk_container_add(GTK_CONTAINER(win), terminal);
+    gtk_widget_show_all(win);
     gtk_main();
 }

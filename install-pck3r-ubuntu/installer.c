@@ -18,14 +18,10 @@ static void install_pck3r (GtkWidget *wid, GtkWidget *win){
     system(".././source-updator-for-dev");
     system("pwd");
     system("sudo cp -r ../pck3r .");
-    system("sudo cp -r ../pck3r-help .");
     system("sudo cp -r ../pck3r-terminal-emu .");
 
     system("sudo cp -r ./pck3r /bin/");
     system("echo pck3r copied ...");
-
-    system("sudo cp -r ./pck3r-help /bin/");
-    system("echo pak3r-help copied ...");
 
     system("sudo cp -r ./pck3r-terminal-emu /bin");
     system("echo pak3r-terminal-emu  copied ...");
@@ -35,6 +31,7 @@ static void install_pck3r (GtkWidget *wid, GtkWidget *win){
     system("sudo apt install curl");
     system("sudo apt install libgtk-3-dev");
     system("sudo apt install libvte-2.91-0 ");
+
 
     system("echo pck3r intalled !!!!!");
     system("sleep 5");

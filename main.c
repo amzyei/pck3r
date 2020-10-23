@@ -22,7 +22,6 @@
  * 2-define color
  */
 
-#define ARG_LEN_HELP 14
 
 ////////////////////////
     //color zone
@@ -44,6 +43,7 @@
 ////////////////////////
     //functions
 ////////////////////////
+
     void updator();
     void clear();
     void node_installer();
@@ -55,7 +55,10 @@
     void sys_ok();
     void version();
     void wine_installer();
+    void pck3r_help();
+
 ///////////////////////
+
 int main ( int argc , char *argv[]){
 
     /*
@@ -93,15 +96,11 @@ int main ( int argc , char *argv[]){
              */
 
 			else if(strcmp(argv[1], "help")==0){
-                /*
-                 * read help (run : /bin/pck3r-help)
-                 * 
-                 */
-                    char read_help[ARG_LEN_HELP] = "./pck3r-";
-                    strcat(read_help, argv[1]);
+
                     printf("%s", CYN);
                     system("sleep 2");
-                    if(( system(read_help) )==0){sys_ok(); break;}
+                    pck3r_help();
+                    sys_ok(); 
                     break;
             }
 
@@ -664,3 +663,62 @@ void wine_installer(){
             }
 }
 
+void pck3r_help(){
+
+puts("-----------------------------------------");
+puts("|                                       |");
+puts("| pck3r : It is a versatile program and |");
+puts("|                                       |");
+puts("| you avoid using useless commands and  |");
+puts("|                                       |");
+puts("| it is written for Ubuntu...           |");
+puts("|                                       |");
+puts("-----------------------------------------");
+puts("");
+puts("\"install\" command :");
+puts("    ");
+puts("    $ pck3r install \"somthing\" :");
+puts("    {");
+puts("            nodejs,");
+puts("            python3pip,");
+puts("            java,");
+puts("            wine,");
+puts("            ohmyzsh,");
+puts("            or ...");
+puts("    }");
+puts("");
+puts("\"clear\" command :");
+puts("    ");
+puts("    $ pck3r clear:");
+puts("    {clear your terminal }");
+puts("");
+puts("\"iso\" command : ");
+puts("    ");
+puts("    $ pck3r iso 32/64  \"somthing\":");
+puts("    {");
+puts("        mint,");
+puts("        fedora,");
+puts("        gentoo,");
+puts("        or ...");
+puts("    }");
+puts("");
+puts("\"dwn\" command :");
+puts("    ");
+puts("    $ pck3r dwn \"https/http://somthing\"");
+puts("    {dwn is downloader for pck3r }");
+puts("");
+puts("\"sys\" command : ");
+puts("    ");
+puts("    $ pck3r sys update ");
+puts("    (update your oprating system)");
+puts("    ");
+puts("    $ pck3r sys upgrade");
+puts("    (upgrade your oprating system)");
+puts("    ");
+puts("    $ pck3r updgr");
+puts("    (both, update and upgrade (full upgrade))");
+puts("");
+puts("\"term\" command :");
+puts("    $pck3r term");
+puts("    (command for run, pck3r terminal emulator)");
+}

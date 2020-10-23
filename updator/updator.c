@@ -15,17 +15,14 @@ static void Pck3r_update (GtkWidget *wid, GtkWidget *win){
 static void update_pck3r (GtkWidget *wid, GtkWidget *win){
     
     GtkWidget *dialog_after_update = NULL;
+
     system(".././source-updator-for-dev");
     system("pwd");
     system("sudo cp -r ../pck3r .");
-    system("sudo cp -r ../pck3r-help .");
     system("sudo cp -r ../pck3r-terminal-emu .");
 
     system("sudo cp -r ./pck3r /bin/");
     system("echo pck3r copied ...");
-
-    system("sudo cp -r ./pck3r-help /bin/");
-    system("echo pak3r-help copied ...");
 
     system("sudo cp -r ./pck3r-terminal-emu /bin");
     system("echo pak3r-terminal-emu  copied ...");
