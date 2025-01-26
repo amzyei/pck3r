@@ -22,7 +22,7 @@ from os import getenv
 
 from . import stuff
 
-message ="""%s
+print("""%s
 -----------------------------------------
 |                                       |
 | pck3r : It is a versatile program and |
@@ -98,5 +98,5 @@ $ pck3r version
         %s
 """ % (stuff.YEL, stuff.NRM)
 
-
+)
 
