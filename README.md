@@ -16,10 +16,6 @@ good luck...
 
     尸⼕长㇌尺
 
-# GUI logo :
-
-![GUI logo](icon/pck3r-logo.png)
-
 
 # about pck3r :
 
