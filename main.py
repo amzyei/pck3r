@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 
-''' 
+""" 
 
-Short description of this Python module.
+Short description of this python3 module.
 Longer description of this module.
 This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
@@ -13,11 +13,12 @@ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program. If not, see <http://www.gnu.org/licenses/>.
+[AMZYEI]
+"""
 
-'''
-from os import system
-from sys import argv 
-from libs import stuff
+from os import system, chdir, getenv
+from sys import argv
+from libs import stuff, dotnet, wine 
 
 argc = len(argv)
 
@@ -269,7 +270,6 @@ for i in range(argc):
             # if user want to see the pck3r version
             elif argv[1] == 'version' and argc ==2:
                 print(f'{stuff.CYN}version is :{stuff.YEL} 0.2{stuff.NRM}')
-                print(f'{stuff.MAG}Authors : {stuff.CYN}{", ".join(__authors__[:2])}, ...{stuff.NRM}')
           
 
             # if command not valid 
