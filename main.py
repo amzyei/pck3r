@@ -92,7 +92,7 @@ for i in range(argc):
                     dotnet.install_dotnet()
 
                 elif argv[2] == 'ohmyzsh' and argc==3:
-                    system('sudo apt install zsh curl')
+                    system('sudo apt install zsh curl git')
                     if (system('curl --version')) == 0 :
                         system('sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"') 
                     else:
