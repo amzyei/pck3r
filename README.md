@@ -41,20 +41,18 @@ $ ./setup.py
 "clear" command :
 
     $ pck3r clear:
-    {clear your terminal }
-
+    clear your terminali (only for fun :D)
 
 "sys" command :
 
     $ pck3r sys update
-    (update your oprating system)
+    update your oprating system
 
     $ pck3r sys upgrade
-    (upgrade your oprating system)
+    upgrade your oprating system
 
     $ pck3r sys updgr
-    (both, update and upgrade (full upgrade))
-
+    update and full-upgrade, Include snap's packages.
 
 "pkg" command :
 
@@ -65,13 +63,13 @@ $ ./setup.py
 "update" command :
 
     $ pck3r update
-    (update to last release from github.com/amzyei/pck3r)
+    update to last release from github.com/amzyei/pck3r
 
 
 
 "version" command :
 
     $ pck3r version
-    (this command show pck3r version)
+    this command show pck3r version
 
 
