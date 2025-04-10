@@ -7,10 +7,7 @@
 
 ![Screenshot](screenshot/pck3r.png)
 
-This program created for novice in linux   and can handle almost things in ubuntu and all distributions  based on  debian(package manager : "apt")...
-the pcker project , started by amzy0(M.Amin azimi.K) and you can change Pck3r under GPL3 license ...
-you can send me a pull request in github : https://github.com/amzyei/pck3r and features will be added soon ...
-good luck...
+Pck3r is a modern package manager for Ubuntu. It acts as a simple tool that helps users manage software with APT, or Advanced Package Tool. Pck3r makes installing, updating, and managing software easier with a clear interface and straightforward commands.
 
 # logo :
 
@@ -39,7 +36,7 @@ good luck...
 *for system wide installation :*
 
 
-$ ./installer.py
+$ ./setup.py
 
 
 
@@ -53,8 +50,7 @@ $ ./installer.py
         nodejs,
         wine,
         ohmyzsh,
-        flstudio,
-        minecraft,
+        waterfox,      
         or ...
     }
     
@@ -76,21 +72,7 @@ $ ./installer.py
     (both, update and upgrade (full upgrade))
 
 
-"tilix" command :
-
-
-    $ pck3r tilix
-    (tilix terminal ...)
-
-
-"dotnet" command :
-
-    $ pck3r install dotnet
-    (installing .NET (dot net ) C0RE, ASP, MCS compiler , ...)    
-
-
 "pkg" command :
-
 
     $ pck3r pkg <package name>"
     (search for packages ...)"
@@ -98,21 +80,12 @@ $ ./installer.py
 
 "update" command :
 
-
     $ pck3r update
     (update to last release from github.com/amzy-0/pck3r)
 
 
 
-"minecraft" command :
-
-
-    $ pck3r minecraft
-    (minecraft runner)
-
-
 "version" command :
-
 
     $ pck3r version
     (this command show pck3r version)

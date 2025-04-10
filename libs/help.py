@@ -1,9 +1,6 @@
 #!/usr/bin/python3
-#!/usr/bin/ruby
-
 """ 
-
-Short description of this RUBY module.
+Short description of this Python module.
 Longer description of this module.
 This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
@@ -17,26 +14,12 @@ this program. If not, see <http://www.gnu.org/licenses/>.
 [AMZYEI]
 """
 
-from os import system as syscall
-from os import getenv
-
 from . import stuff
+def msg():
+    return '''%s
+"install" command :
 
-print("""%s
------------------------------------------
-|                                       |
-| pck3r : It is a versatile program and |
-|                                       |
-| you avoid using useless commands and  |
-|                                       |
-| it is written for Ubuntu...           |
-|                                       |
------------------------------------------
-
-
-\"install\" command :
-
-$ pck3r install \"somthing\" :
+$ pck3r install "somthing" :
 {
     nodejs,
     wine,
@@ -46,13 +29,13 @@ $ pck3r install \"somthing\" :
     or ...
 }
 
-\"clear\" command :
+"clear" command :
 
 $ pck3r clear:
 {clear your terminal }
 
 
-\"sys\" command :
+"sys" command :
 
 $ pck3r sys update
 (update your oprating system)
@@ -64,27 +47,27 @@ $ pck3r sys updgr
 (both, update and upgrade (full upgrade))
 
 
-\"tilix\" command :
+"tilix" command :
 
 $ pck3r tilix
 (tilix terminal ...)
 
-\"dotnet\" command :
+"dotnet" command :
 
 $ pck3r install dotnet
 (installing .NET (dot net ) C0RE, ASP, MCS compiler , ...)
 
-\"pkg\" command :
+"pkg" command :
 
 $ pck3r pkg <package name>
 (search for packages ...)
 
-\"update\" command :
+"update" command :
 
 $ pck3r update
 (update to last release from github.com/amzy-0/pck3r)
 
-\"minecraft\" command :
+"minecraft" command :
 
 $ pck3r minecraft
 (minecraft runner)
@@ -93,10 +76,6 @@ $ pck3r minecraft
 
 $ pck3r version
 (this command show pck3r version)
-
-
-        %s
-""" % (stuff.YEL, stuff.NRM)
-
-)
+%s
+''' % (stuff.YEL, stuff.NRM)
 
