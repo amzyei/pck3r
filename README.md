@@ -65,7 +65,7 @@ $ ./setup.py
 "update" command :
 
     $ pck3r update
-    (update to last release from github.com/amzy-0/pck3r)
+    (update to last release from github.com/amzyei/pck3r)
 
 
 

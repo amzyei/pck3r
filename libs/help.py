@@ -15,67 +15,9 @@ this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 from . import stuff
+with open('README.md', 'r') as readme:
+    readme = readme.readlines()
+
 def msg():
-    return '''%s
-"install" command :
 
-$ pck3r install "somthing" :
-{
-    nodejs,
-    wine,
-    ohmyzsh,
-    flstudio,
-    minecraft,
-    or ...
-}
-
-"clear" command :
-
-$ pck3r clear:
-{clear your terminal }
-
-
-"sys" command :
-
-$ pck3r sys update
-(update your oprating system)
-
-$ pck3r sys upgrade
-(upgrade your oprating system)
-
-$ pck3r sys updgr
-(both, update and upgrade (full upgrade))
-
-
-"tilix" command :
-
-$ pck3r tilix
-(tilix terminal ...)
-
-"dotnet" command :
-
-$ pck3r install dotnet
-(installing .NET (dot net ) C0RE, ASP, MCS compiler , ...)
-
-"pkg" command :
-
-$ pck3r pkg <package name>
-(search for packages ...)
-
-"update" command :
-
-$ pck3r update
-(update to last release from github.com/amzy-0/pck3r)
-
-"minecraft" command :
-
-$ pck3r minecraft
-(minecraft runner)
-
-"version" command :
-
-$ pck3r version
-(this command show pck3r version)
-%s
-''' % (stuff.YEL, stuff.NRM)
-
+    return '%s%s%s' % (stuff.YEL, ''.join(readme[24:]), stuff.NRM)
