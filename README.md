@@ -14,21 +14,6 @@ Pck3r is a modern package manager for Ubuntu. It acts as a simple tool that help
     尸⼕长㇌尺
 
 
-# about pck3r :
-
-    -----------------------------------------
-    |                                       |
-    | pck3r : It is a versatile program and |
-    |                                       |
-    | you avoid using useless commands and  |
-    |                                       |
-    | it is written for Ubuntu...           |
-    |                                       |
-    -----------------------------------------
-
-
-
-
 
 # system wide installation :
 
@@ -49,8 +34,7 @@ $ ./setup.py
     {
         nodejs,
         wine,
-        ohmyzsh,
-        waterfox,      
+        ohmyzsh,      
         or ...
     }
     
