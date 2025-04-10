@@ -98,7 +98,7 @@ Pck3r is a modern package manager for Ubuntu. It acts as a simple tool that help
         'update': update_command,
         'install': install_command,
         'sys': sys_command,
-        'version': lambda: print(f'\b{stuff.sysOk()}\bversion : 2.0')
+        'version': lambda: print(f'\b{stuff.sysOk()}\bversion : 0.1')
     }
 
     if args.command in command_mapping:
