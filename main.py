@@ -1,8 +1,6 @@
 #!/usr/bin/python3
-
-""" 
-
-Short description of this python3 module.
+"""
+Short description of this Python module.
 Longer description of this module.
 This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
@@ -15,269 +13,99 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see <http://www.gnu.org/licenses/>.
 [AMZYEI]
 """
+import os, sys
+import argparse
+from libs import stuff, wine, nodejs, ohmyzsh, help
 
-from os import system, chdir, getenv
-from sys import argv
-from libs import stuff, dotnet, wine 
+def after_empty(command, help_contents=None):
+    if help_contents == None:
+        help_contents = ''
+    print(f'{stuff.sysERR()}{stuff.RED}After "{command}" is empty!\n{stuff.YEL}{help_contents}{stuff.NRM}')
 
-argc = len(argv)
+def sys_command(sys_migration=None):
+    if not sys_migration:
+        after_empty('sys', '''$ pck3r sys {update/upgrade/updgr}
+updgr : update and full-upgrade, Include snap\'s packages.'''
+                    )
+    elif sys_migration == 'update':
+        os.system('sudo apt update')
+    elif sys_migration == 'upgrade':
+        os.system('sudo apt upgrade')
+    elif sys_migration == 'updgr':
+        os.system('sudo apt update && sudo apt -y full-upgrade && snap refresh')
+    else:
+        print(f'{stuff.sysERR()}{stuff.RED}Invalid sys command: {sys_migration}{stuff.NRM}')
 
-for i in range(argc):
+def clear_command():
+    os.system('clear')
+    print(f'{stuff.sysOk()}This is a funny clear command :D')
 
-        # if user just type $ pck3r
-        if argc <= 1:
-                print('%s%sCommand not found !%s\nPlease try:\n$ pck3r help %s' 
-                    %  (stuff.sysERR(), stuff.RED, stuff.CYN, stuff.NRM))
+def update_command():
+    os.chdir('/opt/pck3r')
+    os.system('sudo git pull && sudo git restore .')
 
-        else:
+def install_command(package_name=None):
+    if not package_name:
+        after_empty('install', '$ pck3r install {package name}')
+        return
+    if package_name == 'nodejs':
+        nodejs.install()
+    elif package_name == 'ohmyzsh':
+        ohmyzsh.install()
+    elif package_name == 'wine':
+        wine.wine_install()
+    else:
+        handle_generic_install(package_name)
 
-            # if argument 1 equal to "clear"
-            # clear terminal
-            # do :
-            if argv[1] == 'clear' and argc == 2:
-                system('clear')
-                print('%sThis is funny clear command :D ' 
-                % stuff.sysOk())
-            
-            # pck3r updator
-            elif argv[1] == 'update' and argc == 2:
-                chdir('%s/.pck3r' 
-                % getenv('HOME'))
-                print('%s/.pck3r/./updator'  
-                % getenv('HOME'))
-                system('./updator')
+def handle_generic_install(package_name):
+    print(f'{stuff.sysOk()}\nCommand is valid!\n{stuff.YEL}')
+    if os.system(f'sudo apt install -y {package_name}') != 0:
+        print(f'{stuff.sysERR()}{stuff.RED}Package(s) or Command(s) not found: {package_name}{stuff.NRM}')
 
-            # if argument 1 equal to "help"
-            # like -> $ pck3r help
-            # do :
-            elif argv[1] == 'help' and argc == 2:
-                from libs import help
+def main():
+    ''' main function '''
+    # Description and help message
+    parser = argparse.ArgumentParser(description='''
+Pck3r is a modern package manager for Ubuntu. It acts as a simple tool that helps users manage software with APT, or Advanced Package Tool. Pck3r makes installing, updating, and managing software easier with a clear interface and straightforward commands.
+''', add_help=False)
+    
+    parser.add_argument('-h', '--help', action='store_true', help='show this special help message and exit')
+    parser.add_argument('command', nargs='?', default=None, help='The command to execute')
+    parser.add_argument('args', nargs='*', help='Additional arguments for the command')
 
-            # if argument 1 equal to "install"
-            # and argument 2 is not empty
-            # do :
-            elif argv[1] == 'install' and argc >= 2:
+    args = parser.parse_args()
 
-                # if after install is empty
-                if argv[1]== 'install' and argc <= 2:
-                    print('%s%sAfter "install" is empty !%s ' 
-                    % (stuff.sysERR() , stuff.RED, stuff.NRM))
-                
-                elif argv[2] == 'flstudio' and argc == 3:
-                    from libs import flstudio
+    # Help handler
+    if args.help:
+        print(help.msg())
+        sys.exit(0)
 
-                # if argument 2 is nodejs
-                elif argv[2]=='nodejs' and argc==3:
+    if args.command is None:
+        # If no command is provided
+        print(f'{stuff.sysERR()}{stuff.RED}No command provided. Use "--help" for a list of available commands.{stuff.NRM}')
+        sys.exit(1)
 
-                    if (system(
-                        '''echo %s ; 
-                        curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - ;
-                         echo %s ; sudo apt install nodejs; sudo apt-get update && echo %s;
-                         sudo apt install yarnpkg -y'''
-                        % (stuff.YEL, stuff.CYN, stuff.MAG)))==0:
+    # Valid commands
+    valid_commands = ['clear', 'update', 'install', 'uninstall', 'rm', 'sys', 'version']
 
-                        print('%s' % stuff.sysOk())
+    if args.command not in valid_commands:
+        print(f'{stuff.sysERR()}{stuff.RED}Command not found: {args.command}{stuff.NRM}')
+        sys.exit(1)
+    
+    # Command mapping
+    command_mapping = {
+        'clear': clear_command,
+        'update': update_command,
+        'install': install_command,
+        'sys': sys_command,
+        'version': lambda: print(f'\b{stuff.sysOk()}\bversion : 1.0')
+    }
 
-                        system('echo %s"Nodejs LTS Version :" ;  node --version %s' 
-                        %(stuff.GRN, stuff.NRM))
-                        system('echo "Npm Version :" %s; npm --version %s' 
-                        %(stuff.GRN, stuff.NRM))
+    if args.command in command_mapping:
+        command_mapping[args.command](*args.args)
+    else:
+        print(f'{stuff.sysERR()}{stuff.RED}Command not found: {args.command}{stuff.NRM}')
+        sys.exit(1)
 
-                        # Exception
-                    else:
-                        print('%s%s\nplease retry...\n$ pck3r install nodejs%s ' 
-                        % (stuff.sysERR() , stuff.RED, stuff.NRM))
-
-                elif argv[2] == 'dotnet' and argc==3:
-                    dotnet.install_dotnet()
-
-                elif argv[2] == 'ohmyzsh' and argc==3:
-                    system('sudo apt install zsh curl')
-                    if (system('curl --version')) == 0 :
-                        system('sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"') 
-                    else:
-                        system('echo "curl" is required for using "ohMyZsh" ; sudo apt install curl')
-                        system('sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"') 
-
-                elif argv[2] == 'minecraft' and argc==3:
-                    chdir('%s/.pck3r' % getenv('HOME'))
-                    system('g++ minecraft-pck3r.cpp -o  minecraft')
-                    system('./minecraft')
-                
-                # wine installer blocks
-                # command : $ pck3r install  wine 
-                elif argv[2] == 'wine' and argc==3:
-                    wine.wine_installer()
-
-                # argument 2 is not empty
-
-                elif argv[2:] != [] and argc >= 2:
-                    print('%s%s\nCommand is valid!\n%s' 
-                    % (stuff.sysOk(), stuff.GRN, stuff.YEL))
-                    if (system('sudo apt install %s' 
-                    % ' '.join(argv[2:])))==0:
-                        pass
-                    # Exception
-                    else:
-                        print('%s%sPackage(s) or Command(s) not found : \'%s"' 
-                        % (stuff.sysERR(), stuff.RED, ' '.join(argv[2:])))
-
-            # if argument 1 equal to "uninstall"
-            elif argv[1] == 'uninstall' and argc >= 2:
-
-                # if after "uninstall" is empty
-                if argv[1] == 'uninstall' and argc <= 2:
-
-                    print('%s %sAfter "uninstall" is empty !%s ' 
-                    % (stuff.sysERR() , stuff.RED, stuff.NRM))
-                
-                # if user want uninstall dotnet 
-                # do :
-                elif argv[2]=='dotnet' and argc==3:
-                    dotnet.uninstall_dotnet()
-
-                # argument 2 is not empty
-                # do :
-                elif argv[2:] != [] and argc >= 2:
-                    print('%s%s\nCommand is valid!\n%s' % (stuff.sysOk(), stuff.GRN, stuff.YEL))
-                    system('sudo apt purge %s' % ' '.join(argv[2:]))
-
-            # if argument 1 equal to "rm" (sudo apt remove)
-            elif argv[1] == 'rm' and argc >= 2:
-
-                # if after install is empty
-                if argv[1]== 'rm' and argc<=2:
-                    print('%s %sAfter "rm" is empty !%s ' % (stuff.sysERR() , stuff.RED, stuff.NRM))
-
-                #  argument 2 is not empty
-                # do :
-                if argv[2:] != [] and argc>=2:
-                    print('%s%s\nCommand is valid!\n%s' % (stuff.sysOk(), stuff.GRN, stuff.YEL))
-                    system('sudo apt remove %s' % ' '.join(argv[2:]))
-
-                # Exception
-                else:
-                    print('%sCommand or package(s) not found : %s' % (stuff.sysERR(), ' '.join(argv[2:])))
-
-
-            # Too many arguments error for $ pck3r term
-            # Only use :
-            # $ pck3r tilix <somthing> <somthing> <somthing> <somthing>, ...
-            elif argv[1] =='tilix' and argc==2:
-                system('sudo apt install tilix  ; clear ; tilix ')
-
-
-            # Too many arguments error for $ pck3r tilix
-            # Only use :
-            # $ pck3r tilix <somthing> <somthing> <somthing> <somthing>, ...
-            elif argv[1] =='tilix' and argc>2:
-                    print('%s%sToo many arguments !\nOnly use :\n$ pck3r term %s' % (stuff.sysERR(), stuff.RED, stuff.NRM))
-
-
-            # if after "sys" command is empty
-            elif argv[1] == 'sys' and argc == 2:
-                print('''
-                %s%sAfter "sys" is empty !
-                Please try:
-                $ pck3r sys <update/upgrade/updgr(update and upgrade)>%s
-                '''
-                 % (stuff.sysERR() , stuff.RED, stuff.NRM))
-
-            # if after pck3r equal to "sys"
-            elif argv[1] == 'sys' and argc > 2:
-                if argv[2]=='update' and argc==3:
-                    system('sudo apt update')
-                    print('%s%s\nYour OS updated%s' % (stuff.sysOk(), stuff.GRN, stuff.NRM))
-
-                # if user command, equal to $ pck3r sys upgrade
-                #do :
-                elif argv[2] == 'upgrade' and argc==3:
-                    
-                    if (system('sudo apt full-upgrade')) == 0:
-                        
-                        # print with green logo  
-                        print('%s%syour OS  upgraded' % (stuff.sysOk(), stuff.GRN))
-                        # echo green color and 
-                        # and say:
-                        system('echo %s' % stuff.GRN)
-                    
-                        # All information about OS 
-                        system('echo your OS information :')
-                        system('uname -a ')
-
-                        # the machine architecture 
-                        system('echo your machine architecture : ')
-                        system('uname -p')
-                        # end of the all information and 
-                        #back to the true color of this terminal 
-                        system('echo %s' % stuff.NRM)
-                    
-                    # Exception
-                    else:
-                        
-                        print(f'{stuff.sysERR()}{stuff.RED}Please try:\n$ pck3r sys <update/upgrade/updgr(update and upgrade)>{stuff.NRM}')
-
-
-                # if user command, equal to $ pck3r sys updgr
-                #do :
-                elif argv[2] == 'updgr' and argc==3:
-                    
-                    if (system('sudo apt update && sudo apt full-upgrade')) ==0:
-                            
-                        print('%s%syour OS updated and upgraded' % (stuff.sysOk(), stuff.GRN))
-                        system('echo %s' % stuff.GRN)
-                        system('echo your OS information :')
-                        system('uname -a ')
-                        system('echo your machine architecture : ')
-                        system('uname -p')
-                        system('echo %s' % stuff.NRM)
-                                    
-                # if command is not a valid one !
-                # will send an error to the user.
-                # do :
-                else:
-                    print(f'{stuff.sysERR()}{stuff.RED}Please try:\n$ pck3r sys <update/upgrade/updgr(update and upgrade)>{stuff.NRM}')
-                    
-                    
-            # if after "pkg" is empty
-            elif argv[1]== 'pkg' and argc <= 2:
-                print('%s%sAfter "pkg" is empty !%s ' % (stuff.sysERR() , stuff.RED, stuff.NRM))
-            
-            # if after "pkg" is not empty
-            elif argv[1] == 'pkg' and argc >= 2:
-
-                # if after "pkg" isn't empty
-                if argv[2:] != [] and argc >= 2:
-                    system('sudo apt search %s' % ' '.join(argv[2:]))
-            
-            elif argv[1] == 'minecraft' and argc ==2:
-
-                    if (system('ls ~/.TLauncher-2.75.jar'))==0:
-                            print('%s%sRunning minecraft...%s' %(stuff.sysOk() , stuff.GRN, stuff.NRM))
-                            system('sudo java -jar ~/.TLauncher-2.75.jar')
-                    
-                    else:
-
-                        print('''%s%s
-                        Can't running minecraft  !
-                        check this path : %s/.TLauncher-2.75.jar
-                        install minecraft :
-                        $ pck3r install minecraft%s
-                        '''
-                        %(stuff.sysERR(), stuff.RED, getenv('HOME'), stuff.NRM))
-            
-
-            # if user want to see the pck3r version
-            elif argv[1] == 'version' and argc ==2:
-                print(f'{stuff.CYN}version is :{stuff.YEL} 0.2{stuff.NRM}')
-          
-
-            # if command not valid 
-            # print :
-            # and breaking any operation  
-            else:
-                print('%s%sCommand not found !%s\nPlease try:\n$ pck3r help %s'
-                 % (stuff.sysERR(), stuff.RED, stuff.CYN, stuff.NRM))
-
-        # end of (for) loop
-        break
+if __name__ == '__main__':
+    main()

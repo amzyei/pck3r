@@ -15,9 +15,15 @@ this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 from . import stuff
-with open('README.md', 'r') as readme:
-    readme = readme.readlines()
+import os 
 
-def msg():
-
-    return '%s%s%s' % (stuff.YEL, ''.join(readme[24:]), stuff.NRM)
+def install():
+    if os.system(f'''
+    echo {stuff.YEL} ; 
+    curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash - ;
+    echo {stuff.CYN} ; sudo apt install -y nodejs ;
+    sudo apt-get update && echo {stuff.MAG} ;''') == 0:
+        print(f'{stuff.sysOk()}Node.js installed successfully!')
+        
+    else:
+        print(f'{stuff.sysERR()}{stuff.RED}\nPlease retry...\n$pck3r install nodejs{stuff.NRM}')
