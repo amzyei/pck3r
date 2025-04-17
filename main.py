@@ -58,7 +58,7 @@ def install_command(package_name=None):
         handle_generic_install(package_name)
 
 def handle_generic_install(package_name):
-    print(f'{stuff.sysOk()}\nCommand is valid!\n{stuff.YEL}')
+    print(f'{stuff.sysOk()}\nCommand\'s sekeleton is valid!\n{stuff.YEL}')
     if os.system(f'sudo apt install -y {package_name}') != 0:
         print(f'{stuff.sysERR()}{stuff.RED}Package(s) or Command(s) not found: {package_name}{stuff.NRM}')
 
