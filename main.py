@@ -15,24 +15,32 @@ this program. If not, see <http://www.gnu.org/licenses/>.
 """
 import os, sys
 import argparse
-from libs import stuff, wine, nodejs, ohmyzsh, help
+from libs import stuff, nodejs, ohmyzsh, help
 
 def after_empty(command, help_contents=None):
     if help_contents == None:
         help_contents = ''
     print(f'{stuff.sysERR()}{stuff.RED}After "{command}" is empty!\n{stuff.YEL}{help_contents}{stuff.NRM}')
 
+def pkg_find(package_name=None):
+    if not package_name:
+        after_empty('pkg', help_contents='$ pck3r pkg hello')
+    else:
+        os.system(f'apt search "{package_name}.+*" ')
+        
+        
+
 def sys_command(sys_migration=None):
     if not sys_migration:
         after_empty('sys', '''$ pck3r sys {update/upgrade/updgr}
-updgr : update and full-upgrade, Include snap\'s packages.'''
+updgr : update and full-upgrade, packages.'''
                     )
     elif sys_migration == 'update':
         os.system('sudo apt update')
     elif sys_migration == 'upgrade':
         os.system('sudo apt upgrade')
     elif sys_migration == 'updgr':
-        os.system('sudo apt update && sudo apt -y full-upgrade && snap refresh')
+        os.system('sudo apt update && sudo apt -y full-upgrade')
     else:
         print(f'{stuff.sysERR()}{stuff.RED}Invalid sys command: {sys_migration}{stuff.NRM}')
 
@@ -48,17 +56,18 @@ def install_command(package_name=None):
     if not package_name:
         after_empty('install', '$ pck3r install {package name}')
         return
+    
     if package_name == 'nodejs':
         nodejs.install()
+        
     elif package_name == 'ohmyzsh':
         ohmyzsh.install()
-    elif package_name == 'wine':
-        wine.wine_install()
+        
     else:
         handle_generic_install(package_name)
 
 def handle_generic_install(package_name):
-    print(f'{stuff.sysOk()}\nCommand\'s sekeleton is valid!\n{stuff.YEL}')
+    print(f'{stuff.sysOk()}\n[WAIT FOR PROCESSING]\n{stuff.YEL}')
     if os.system(f'sudo apt install -y {package_name}') != 0:
         print(f'{stuff.sysERR()}{stuff.RED}Package(s) or Command(s) not found: {package_name}{stuff.NRM}')
 
@@ -86,7 +95,7 @@ Pck3r is a modern package manager for Ubuntu. It acts as a simple tool that help
         sys.exit(1)
 
     # Valid commands
-    valid_commands = ['clear', 'update', 'install', 'uninstall', 'rm', 'sys', 'version']
+    valid_commands = ['clear', 'update', 'install', 'uninstall', 'rm', 'sys', 'pkg', 'version']
 
     if args.command not in valid_commands:
         print(f'{stuff.sysERR()}{stuff.RED}Command not found: {args.command}{stuff.NRM}')
@@ -98,6 +107,7 @@ Pck3r is a modern package manager for Ubuntu. It acts as a simple tool that help
         'update': update_command,
         'install': install_command,
         'sys': sys_command,
+        'pkg': pkg_find,
         'version': lambda: print(f'\b{stuff.sysOk()}\bversion : 1.0')
     }
 
