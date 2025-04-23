@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/bin/env python3
 
 """ 
 
@@ -27,7 +27,7 @@ CYN = "\x1B[36m"
 WHT = "\x1B[37m"
 #end of color zone
 
-# Modules error !
+# Modules error
 
 def stop():
     print("""

@@ -22,13 +22,20 @@ def install():
 
     if os.system('curl --version') != 0:
         print(f'{stuff.sysERR()}{stuff.RED}"curl" is required for using "oh-my-zsh" ; installing curl...{stuff.NRM}')
+        return
+    
     if os.system('curl --version') != 0:
         print(f'{stuff.sysERR()}{stuff.RED}"curl" is required for using "oh-my-zsh" ; installing curl...{stuff.NRM}')
+        return
+    
         if os.system('sudo apt install curl -y') != 0:
             print(f'{stuff.sysERR()}{stuff.RED}Failed to install curl. Please install it manually.{stuff.NRM}')
             return
+        
     installation_command = 'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
     if os.system(installation_command) == 0:
         print(f'{stuff.sysOk()}Oh My Zsh installed successfully!{stuff.NRM}')
     else:
+        
         print(f'{stuff.sysERR()}{stuff.RED}Oh My Zsh installation failed.{stuff.NRM}')
+        return
