@@ -15,9 +15,17 @@ this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 from . import stuff
-with open('README.md', 'r') as readme:
-    readme = readme.readlines()
-
 def msg():
+    
+    try:
+        with open('/bin/pck3r-help', 'r') as readme:
+            readme = readme.readlines()
+
+    except:#local try
+        with open('./README.md', 'r') as readme:
+            readme = readme.readlines()
+
+    finally:
+        print(f'{stuff.sysERR()}help : not found(stuff.NRM)')
 
     return '%s%s%s' % (stuff.YEL, ''.join(readme[24:]), stuff.NRM)
