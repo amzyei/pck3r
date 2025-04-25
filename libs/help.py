@@ -25,7 +25,4 @@ def msg():
         with open('./README.md', 'r') as readme:
             readme = readme.readlines()
 
-    finally:
-        print(f'{stuff.sysERR()}help : not found(stuff.NRM)')
-
     return '%s%s%s' % (stuff.YEL, ''.join(readme[24:]), stuff.NRM)
