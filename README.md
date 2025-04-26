@@ -33,9 +33,8 @@ $ ./setup.py
     $ pck3r install "somthing" :
     {
         nodejs,
-        wine,
-        ohmyzsh,      
-        or ...
+        ohmyzsh,
+        or...
     }
     
 "clear" command :
