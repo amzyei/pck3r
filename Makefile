@@ -13,3 +13,6 @@ build: deps
 
 clean:
 	rm -f $(BINARY_NAME)
+
+install: build
+	sudo install -m 755 $(BINARY_NAME) /usr/local/bin/$(BINARY_NAME)
