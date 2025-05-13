@@ -16,3 +16,5 @@ clean:
 
 install: build
 	sudo install -m 755 $(BINARY_NAME) /usr/local/bin/$(BINARY_NAME)
+	sudo mkdir -p /usr/local/share/pck3r
+	sudo cp README.md /usr/local/share/pck3r/
