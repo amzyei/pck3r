@@ -28,11 +28,11 @@ func sysOk(msg string) string {
 }
 
 func printHelp() {
-	// Try to read /bin/pck3r-help first
-	helpPath := "/bin/pck3r-help"
+	// Try to read /usr/local/share/pck3r/README.md first
+	helpPath := "/usr/local/share/pck3r/README.md"
 	content, err := ioutil.ReadFile(helpPath)
 	if err != nil {
-		// fallback to local README.md starting from line 24
+		// fallback to local README.md starting from "# pck3r commands"
 		readmePath := "README.md"
 		content, err = ioutil.ReadFile(readmePath)
 		if err != nil {
@@ -40,9 +40,14 @@ func printHelp() {
 			return
 		}
 		lines := bytes.Split(content, []byte{'\n'})
-		if len(lines) > 24 {
-			content = bytes.Join(lines[24:], []byte{'\n'})
+		startIndex := 0
+		for i, line := range lines {
+			if bytes.HasPrefix(line, []byte("# pck3r commands")) {
+				startIndex = i
+				break
+			}
 		}
+		content = bytes.Join(lines[startIndex:], []byte{'\n'})
 	}
 	fmt.Println(yellow(string(content)))
 }
@@ -93,18 +98,6 @@ func clearCommand() {
 	cmd.Stderr = os.Stderr
 	_ = cmd.Run()
 	fmt.Println(sysOk("This is a funny clear command :D"))
-}
-
-func updateCommand() {
-	err := os.Chdir("/opt/pck3r")
-	if err != nil {
-		fmt.Println(sysErr("Failed to change directory to /opt/pck3r"))
-		return
-	}
-	cmd := exec.Command("bash", "-c", "sudo git pull && sudo git restore .")
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	_ = cmd.Run()
 }
 
 func installCommand(packageName string) {
@@ -193,7 +186,6 @@ func main() {
 
 	validCommands := map[string]bool{
 		"clear":     true,
-		"update":    true,
 		"install":   true,
 		"uninstall": true,
 		"rm":        true,
@@ -210,8 +202,6 @@ func main() {
 	switch arg {
 	case "clear":
 		clearCommand()
-	case "update":
-		updateCommand()
 	case "install":
 		var pkg string
 		if len(os.Args) > 2 {
