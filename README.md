@@ -55,12 +55,6 @@ $   make install
     (search for packages ...)"
 
 
-"update" command :
-
-    $ pck3r update
-    update to last release from github.com/amzyei/pck3r
-
-
 
 "version" command :
 
