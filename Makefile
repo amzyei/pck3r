@@ -10,6 +10,7 @@ deps:
 
 build: deps
 	go build -o $(BINARY_NAME) main.go
+	strip ${BINARY_NAME}
 
 clean:
 	rm -f $(BINARY_NAME)
