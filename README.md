@@ -15,13 +15,9 @@ Pck3r is a modern package manager for Ubuntu. It acts as a simple tool that help
 
 
 
-# system wide installation :
+# System Wide Installation :
 
-
-*for system wide installation :*
-
-
-$ ./setup.py
+$   make install
 
 
 
