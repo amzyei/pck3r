@@ -16,9 +16,15 @@ this program. If not, see <http://www.gnu.org/licenses/>.
 
 from . import stuff
 #reading from README
-with open('README.md' or '/opt/pck3r/README.md', 'r') as readme:
-    readme = readme.readlines()
+
+try:
+    with open('/opt/pck3r/README.md', 'r') as readme:
+        readme = ''.join(readme.readlines()[24:])
+
+except:
+    with open('README.md', 'r') as readme:
+        readme = ''.join(readme.readlines()[24:])
 
 def msg():
 
-    return '%s%s%s' % (stuff.YEL, ''.join(readme[24:]), stuff.NRM)
+    return '%s%s%s' % (stuff.YEL, readme, stuff.NRM)
