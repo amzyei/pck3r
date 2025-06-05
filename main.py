@@ -36,6 +36,12 @@ updgr : update and full-upgrade, Include snap\'s packages.'''
     else:
         print(f'{stuff.sysERR()}{stuff.RED}Invalid sys command: {sys_migration}{stuff.NRM}')
 
+
+def remove(package_name=None):
+    if not package_name: 
+        after_empty('remove', '$ pck3r rm <package name>')
+    if package_name:
+        os.system('sudo apt remove %s' % package_name)
 def clear_command():
     os.system('clear')
     print(f'{stuff.sysOk()}This is a funny clear command :D')
@@ -86,7 +92,7 @@ Pck3r is a modern package manager for Ubuntu. It acts as a simple tool that help
         sys.exit(1)
 
     # Valid commands
-    valid_commands = ['clear', 'update', 'install', 'uninstall', 'rm', 'sys', 'version']
+    valid_commands = ['clear', 'rm', 'update', 'install', 'uninstall', 'rm', 'sys', 'version']
 
     if args.command not in valid_commands:
         print(f'{stuff.sysERR()}{stuff.RED}Command not found: {args.command}{stuff.NRM}')
@@ -97,10 +103,11 @@ Pck3r is a modern package manager for Ubuntu. It acts as a simple tool that help
         'clear': clear_command,
         'update': update_command,
         'install': install_command,
+        'rm'     : remove,
         'sys': sys_command,
         'version': lambda: print(f'\b{stuff.sysOk()}\bversion : 1.0')
     }
-
+ 
     if args.command in command_mapping:
         command_mapping[args.command](*args.args)
     else:
