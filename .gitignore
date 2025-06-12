@@ -1,3 +1,4 @@
 *.msi
 *.o
 *.bin
+.vscode
