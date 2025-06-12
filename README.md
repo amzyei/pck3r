@@ -15,7 +15,7 @@ Pck3r is a modern package manager for Windows 10 x64. It acts as a tool that hel
 
 "install" command :
 
-    $ pck3r install "something" :
+    pck3r install "something" :
     {
         nodejs,
         google-chrome
