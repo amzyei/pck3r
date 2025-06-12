@@ -23,7 +23,7 @@ int main(int argc, char* argv[]) {
     }
 
     std::map<std::string, bool> validCommands = {
-        {"clear", true},
+        {"cls", true},
         {"install", true},
         {"version", true}
     };
