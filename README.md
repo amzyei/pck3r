@@ -4,8 +4,6 @@
 ![]()
 # pck3r :
 
-![Screenshot](screenshot/pck3r.png)
-
 Pck3r is a modern package manager for Windows 10 x64. It acts as a tool that helps users manage software with MSI installers on Windows. Pck3r makes installing, download and managing software easier with a clear interface and straightforward commands.
 
 
@@ -26,7 +24,7 @@ Pck3r is a modern package manager for Windows 10 x64. It acts as a tool that hel
 "cls" command :
 
     pck3r cls
-    clear your terminal [only for fun :)]
+    clear your terminal [ only for fun :) ]
 
 "version" command :
 
