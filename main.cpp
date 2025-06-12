@@ -33,7 +33,7 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    if (arg == "clear") {
+    if (arg == "cls") {
         clearCommand();
     } else if (arg == "install") {
         std::string pkg = (argc > 2) ? argv[2] : "";
