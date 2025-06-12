@@ -2,4 +2,4 @@
 *.o
 *.bin
 .vscode
-.gitignore.*
+.*gitignore*~
