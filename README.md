@@ -1,98 +1,34 @@
-
-
-
-
-# pck3r
+![release](https://img.shields.io/badge/release-1.0-blue) ![issues](https://img.shields.io/github/issues/amzyei/pck3r) ![license](https://img.shields.io/github/license/amzyei/pck3r)
+![]()
+![]()
+![]()
+# pck3r :
 
 ![Screenshot](screenshot/pck3r.png)
 
-this program created for novice in linux   and this program, can handle almost things in ubuntu and all distributions  based on  debian(package manager : "apt")...
-this program , create by amzy0(M.Amin azimi.K) this program , can change under GPL3 license ...
-you can send me a pull request in github : https://github.com/amzy-0/pck3r and features will be added to pck3r soon ...
-good luck...
-
-# logo
-
-<pre>
-  尸⼕长㇌尺
-</pre>
-
-# help and  use
-
-<pre>
------------------------------------------
-|                                       |
-| pck3r : It is a versatile program and |
-|                                       |
-| you avoid using useless commands and  |
-|                                       |
-| it is written for Ubuntu...           |
-|                                       |
------------------------------------------
-</pre>
+Pck3r is a modern package manager for Windows 10 x64. It acts as a tool that helps users manage software with MSI installers on Windows. Pck3r makes installing, download and managing software easier with a clear interface and straightforward commands.
 
 
+# Local build 
+    g++ -o pck3r.exe main.cpp
+
+# EXECUTE pck3r.exe 
+#### pck3r commands
 
 "install" command :
-    
-    $ pck3r install "somthing" :
+
+    $ pck3r install "something" :
     {
-            nodejs,
-            python3pip,
-            java,
-            wine,
-            ohmyzsh,
-            or ...
+        nodejs,
+        google-chrome
     }
 
-"clear" command :
-    
-    $ pck3r clear:
-    {clear your terminal }
+"cls" command :
 
-"iso" command : 
-    
-    $ pck3r iso 32/64  "somthing":
-    {
-        mint,
-        fedora,
-        gentoo,
-        or ...
-    }
+    pck3r cls
+    clear your terminal [only for fun :)]
 
-"dwn" command :
-    
-    $ pck3r dwn "https/http://somthing"
-    {dwn is downloader for pck3r }
+"version" command :
 
-"sys" command : 
-    
-    $ pck3r sys update 
-    (update your oprating system)
-    
-    $ pck3r sys upgrade
-    (upgrade your oprating system)
-    
-    $ pck3r updgr
-    (both, update and upgrade (full upgrade))
-
-"term" command :
-
-    $ pck3r term
-    (command for run, pck3r terminal emulator)
-
-
-# install pck3r  global 
-
-
-$ cd install-pck3r-ubuntu/
-
-$ ./installer
-
-
-# update pck3r 
-
-
-$ cd updator/
-
-$ ./updator
+    $ pck3r version
+    this command shows pck3r version
