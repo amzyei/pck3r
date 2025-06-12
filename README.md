@@ -18,7 +18,8 @@ Pck3r is a modern package manager for Windows 10 x64. It acts as a tool that hel
     pck3r install "something" :
     {
         nodejs,
-        google-chrome
+        google-chrome,
+        firefox
     }
 
 "cls" command :
@@ -28,5 +29,5 @@ Pck3r is a modern package manager for Windows 10 x64. It acts as a tool that hel
 
 "version" command :
 
-    $ pck3r version
+    pck3r version
     this command shows pck3r version
