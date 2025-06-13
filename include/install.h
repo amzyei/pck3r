@@ -5,11 +5,14 @@
 #include "chrome.h"
 #include "firefox.h"
 #include "nodejs.h"
+#include "winrar.h"
+
 void installNodejs();
 void installFirefox();
 void handleGenericInstall(const std::string& packageName);
+inline void install_other(const std::string& url, const std::string& installer);
 
-inline void installCommand(const std::string& packageName) {
+void installCommand(const std::string& packageName) {
     if (packageName.empty()) {
         afterEmpty("install", "pck3r install {package name}");
         return;
@@ -20,6 +23,8 @@ inline void installCommand(const std::string& packageName) {
         installFirefox();
     } else if (packageName == "google-chrome") {
         installGoogleChrome();
+    } else if (packageName == "winrar") {
+        winrar();
     } else {
         handleGenericInstall(packageName);
     }
