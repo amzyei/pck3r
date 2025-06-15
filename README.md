@@ -19,7 +19,8 @@ Pck3r is a modern package manager for Windows 10 x64. It acts as a tool that hel
     {
         nodejs,
         google-chrome,
-        firefox
+        firefox,
+        winrar
     }
 
 "cls" command :
