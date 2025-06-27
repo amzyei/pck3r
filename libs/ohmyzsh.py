@@ -18,7 +18,7 @@ import os
 
 def install():
     print(f'Installing Oh My Zsh...')
-    os.system('sudo apt install -y git')
+    os.system('sudo apt install -y zsh git')
 
     if os.system('curl --version') != 0:
         print(f'{stuff.sysERR()}{stuff.RED}"curl" is required for using "oh-my-zsh" ; installing curl...{stuff.NRM}')
