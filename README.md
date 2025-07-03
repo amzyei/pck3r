@@ -1,98 +1,65 @@
+![release](https://img.shields.io/badge/release-1.0-blue) ![issues](https://img.shields.io/github/issues/amzyei/pck3r) ![license](https://img.shields.io/github/license/amzyei/pck3r)
 
+# pck3r : C++ Package Manager for Windows
 
+Pck3r is a modern package manager for Windows 10 x64, implemented in C++ for performance and modularity. It helps users manage software installations with MSI installers on Windows. Pck3r makes installing, downloading, and managing software easier with a clear interface and straightforward commands.
 
+## Requirements
 
-# pck3r
+- Windows 10 x64
+- g++ compiler (MinGW or similar)
 
-![Screenshot](screenshot/pck3r.png)
+## Setup
 
-this program created for novice in linux   and this program, can handle almost things in ubuntu and all distributions  based on  debian(package manager : "apt")...
-this program , create by amzy0(M.Amin azimi.K) this program , can change under GPL3 license ...
-you can send me a pull request in github : https://github.com/amzy-0/pck3r and features will be added to pck3r soon ...
-good luck...
+1. Compile the project using g++:
 
-# logo
+```bash
+g++ -Iinclude -o pck3r.exe main.cpp -lurlmon -lshell32
+```
 
-<pre>
-  尸⼕长㇌尺
-</pre>
+2. Run the executable with desired commands:
 
-# help and  use
+```bash
+.\pck3r.exe [command] [options]
+```
 
-<pre>
------------------------------------------
-|                                       |
-| pck3r : It is a versatile program and |
-|                                       |
-| you avoid using useless commands and  |
-|                                       |
-| it is written for Ubuntu...           |
-|                                       |
------------------------------------------
-</pre>
+## Commands
 
+- **install**: Install a package
 
+```bash
+.\pck3r.exe install [package_name]
+```
 
-"install" command :
-    
-    $ pck3r install "somthing" :
-    {
-            nodejs,
-            python3pip,
-            java,
-            wine,
-            ohmyzsh,
-            or ...
-    }
+Supported packages include:
 
-"clear" command :
-    
-    $ pck3r clear:
-    {clear your terminal }
+- nodejs
+- google-chrome
+- firefox
+- winrar
 
-"iso" command : 
-    
-    $ pck3r iso 32/64  "somthing":
-    {
-        mint,
-        fedora,
-        gentoo,
-        or ...
-    }
+- **cls**: Clear the terminal (just for fun)
 
-"dwn" command :
-    
-    $ pck3r dwn "https/http://somthing"
-    {dwn is downloader for pck3r }
+```bash
+.\pck3r.exe cls
+```
 
-"sys" command : 
-    
-    $ pck3r sys update 
-    (update your oprating system)
-    
-    $ pck3r sys upgrade
-    (upgrade your oprating system)
-    
-    $ pck3r updgr
-    (both, update and upgrade (full upgrade))
+- **version**: Show the current version
 
-"term" command :
+```bash
+.\pck3r.exe version
+```
 
-    $ pck3r term
-    (command for run, pck3r terminal emulator)
+- **help**: Show help information
 
+```bash
+.\pck3r.exe /help
+```
 
-# install pck3r  global 
+## Development
 
+The project is modularized for easier maintenance and extension. The main executable handles command parsing and delegates to modules for specific functionality.
 
-$ cd install-pck3r-ubuntu/
+## License
 
-$ ./installer
-
-
-# update pck3r 
-
-
-$ cd updator/
-
-$ ./updator
+Pck3r uses the license in the [LICENSE](./LICENSE) file.
