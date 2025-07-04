@@ -2,7 +2,7 @@
 
 # pck3r : C++ Package Manager for Windows
 
-Pck3r is a modern package manager for Windows 10 x64, implemented in C++ for performance and modularity. It helps users manage software installations with MSI installers on Windows. Pck3r makes installing, downloading, and managing software easier with a clear interface and straightforward commands.
+Pck3r is a modern package manager for Windows 10 x64, implemented in C++ for performance and modularity. It helps users manage software installations with MSI/EXE installers on Windows. Pck3r makes installing, downloading, and managing software easier with a clear interface and straightforward commands.
 
 ## Requirements
 
