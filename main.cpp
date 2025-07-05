@@ -6,13 +6,13 @@
 
 int main(int argc, char* argv[]) {
     if (argc < 2) {
-        std::cout << sysErr("") << "No command provided. Use \"/help\" for a list of available commands." << std::endl;
+        std::cout << sysErr("") << "No command provided. Use \"help\" for a list of available commands." << std::endl;
         return 1;
     }
 
     std::string arg = argv[1];
 
-    if (arg == "/h" || arg == "/help") {
+    if (arg == "h" || arg == "help") {
         printHelp();
         return 0;
     }
