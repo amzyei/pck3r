@@ -53,6 +53,21 @@ Clear your terminal (just for fun :D):
 pck3r clear
 ```
 
+### rm
+
+Remove packages such as nodejs, wine, ohmyzsh, or others:
+
+```bash
+pck3r rm "package_name"
+```
+
+Example packages:
+
+- nodejs
+- wine
+- ohmyzsh
+- or others
+
 ### sys
 
 Manage your operating system updates:
@@ -81,3 +96,4 @@ Show the current version of pck3r:
 
 ```bash
 pck3r version
+```
