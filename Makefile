@@ -1,5 +1,5 @@
 SUDO = sudo
-LINK = /bin/pck3r
+LINK = /usr/bin/pck3r
 TARGET_DIR = /opt/pck3r
 SRC_DIR = .
 
@@ -8,8 +8,8 @@ SRC_DIR = .
 all: install check
 
 uninstall:
-	@echo "Unlinking $(LINK) (if installed)"
-	-$(SUDO) unlink $(LINK) || true
+	@echo "Removing $(LINK) (if installed)"
+	$(SUDO) rm -r $(LINK) || true
 	@if [ -d "$(TARGET_DIR)" ]; then \
 		echo "Removing $(TARGET_DIR) directory"; \
 		$(SUDO) rm -rf $(TARGET_DIR); \
@@ -21,15 +21,19 @@ install: uninstall
 	@echo "Creating $(TARGET_DIR) directory"
 	$(SUDO) mkdir -p $(TARGET_DIR)
 	@echo "Copying files to $(TARGET_DIR)"
-	$(SUDO) cp -rf $(SRC_DIR)/* $(TARGET_DIR)
-	@echo "Creating symbolic link $(LINK) -> $(TARGET_DIR)/main.py"
-	$(SUDO) ln -sf $(TARGET_DIR)/main.py $(LINK)
+	$(SUDO) rsync -a $(SRC_DIR)/ $(TARGET_DIR)/
+	@echo "Making main.py executable"
+	$(SUDO) chmod +x $(TARGET_DIR)/main.py
+	@echo "Creating wrapper script $(LINK)"
+	@echo '#!/bin/sh' | $(SUDO) tee $(LINK) > /dev/null
+	@echo '/usr/bin/python3 $(TARGET_DIR)/main.py "$$@"' | $(SUDO) tee -a $(LINK) > /dev/null
+	$(SUDO) chmod +x $(LINK)
 
 check:
-	@echo "Checking link $(LINK)"
-	@if [ -L "$(LINK)" ]; then \
+	@echo "Checking $(LINK)"
+	@if [ -e "$(LINK)" ] && [ -x "$(LINK)" ]; then \
 		ls -l $(LINK); \
-		echo "Link created successfully"; \
+		echo "Executable found successfully"; \
 	else \
-		echo "No link found at $(LINK)"; \
+		echo "No executable found at $(LINK)"; \
 	fi
