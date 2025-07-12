@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+
+
 """
 Short description of this Python module.
 Longer description of this module.
@@ -15,7 +17,20 @@ this program. If not, see <http://www.gnu.org/licenses/>.
 """
 import os, sys
 import argparse
-from libs import stuff, wine, nodejs, ohmyzsh, help
+from libs import stuff, wine, nodejs, ohmyzsh, help, firefox
+
+# Valid commands
+valid_commands = ['clear', 'rm', 'update', 'install', 'uninstall', 'pkg', 'sys', 'version']
+
+
+def pkg(package_name=None):
+    if package_name == None:
+        after_empty('pkg', 'pck3r pkg <package_name>')
+        return
+    if package_name in valid_commands:
+        install_command(package_name)
+    else:
+        os.system(f'apt search {package_name}')
 
 def after_empty(command, help_contents=None):
     if help_contents == None:
@@ -60,6 +75,8 @@ def install_command(package_name=None):
         ohmyzsh.install()
     elif package_name == 'wine':
         wine.wine_install()
+    elif package_name == 'firefox':
+        firefox.installFirefox()
     else:
         handle_generic_install(package_name)
 
@@ -91,9 +108,6 @@ Pck3r is a modern package manager for Ubuntu. It acts as a simple tool that help
         print(f'{stuff.sysERR()}{stuff.RED}No command provided. Use "--help" for a list of available commands.{stuff.NRM}')
         sys.exit(1)
 
-    # Valid commands
-    valid_commands = ['clear', 'rm', 'update', 'install', 'uninstall', 'rm', 'sys', 'version']
-
     if args.command not in valid_commands:
         print(f'{stuff.sysERR()}{stuff.RED}Command not found: {args.command}{stuff.NRM}')
         sys.exit(1)
@@ -104,6 +118,7 @@ Pck3r is a modern package manager for Ubuntu. It acts as a simple tool that help
         'update': update_command,
         'install': install_command,
         'rm'     : remove,
+        'pkg'     : pkg,
         'sys': sys_command,
         'version': lambda: print(f'\b{stuff.sysOk()}\bversion : 1.0')
     }
