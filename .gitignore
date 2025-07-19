@@ -1,0 +1,5 @@
+*.msi
+*.o
+*.bin
+.vscode
+.*gitignore*~
